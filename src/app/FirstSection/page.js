@@ -11,11 +11,11 @@ const FirstSection = () => {
   
     return (
       <div
-        className="bg-ed-300 bg-cover bg-center h-screen flex flex-col items-center justify-center text-center w-full"
+        className="py-16 bg-cover bg-center h-auto flex flex-col items-center justify-center text-center w-full"
         style={{ backgroundImage: `url(${data.image})` }} 
       >
         <div className="text-center  w-[50%] ">
-        <h2 className="mt-100 text-gray-500 text-4xl font-semibold uppercase ">
+        <h2 className="text-gray-500 text-4xl font-semibold uppercase ">
           {data.title}
         </h2>
         <h1 className="text-4xl md:text-6xl font-bold text-black mt-4 leading-tight">

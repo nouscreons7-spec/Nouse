@@ -78,7 +78,7 @@ const SecondSection = () => {
           <button
             key={category}
             onClick={() => setSelectedIndex(index)}
-            className={` px-4 py-2 rounded-lg text-white text-xs w-36 h-10 ${
+            className={`cursor-pointer px-4 py-2 rounded-lg text-white text-xs w-36 h-10 ${
               selectedIndex === index
                 ? "bg-gray-900"
                 : "bg-transparent-md backdrop-blur-md  hover:bg-gray-800"
