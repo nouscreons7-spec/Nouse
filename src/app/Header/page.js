@@ -10,8 +10,8 @@ const Header = ({ navItems, contactNumber, quoteText }) => {
   return (
     <header className="absolute top-0 left-0 w-full h-[20%] z-10 bg-gradient-to-b from-black/80 to-transparent text-white p-4 flex w-full items-center">
        <Drawer isOpen={showDrawer} onClose={onClose} />
-      <div className="text-2xl font-bold flex items-center w-[25%]">
-        <img src="/logo.png" alt="Creo Homes" className="h-10" />
+      <div className="flex justify-center  text-2xl font-bold flex items-center w-[20%]">
+        <img src="/logo/lgo.png" alt="Creo Homes" className="h-32 w-40" />
       </div>
 
       {/* Navigation Menu */}
