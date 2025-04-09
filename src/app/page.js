@@ -16,16 +16,11 @@ const Home = () => {
     { label: "Turnkey Projects", link: "#turnkey" },
   ];
 
-  const bannerImages = [
-    "/banner/shade1.jpg",
-    "/banner/shade2.jpg",
-    "/banner/shade3.jpg",
-  ];
 
   return (
     <div>
       <Header navItems={navItems} contactNumber="+91 9645 899 951" quoteText="Get a quote" />
-      <Banner images={bannerImages} interval={4000} />
+      <Banner />
       <Firstsection />
       <ThirdSection />
       <AnnounceContent  backgroundImage ="/img/grat.jpeg" title="Have a project in mind?" buttonText="talk to us today" buttonLink="/"  />

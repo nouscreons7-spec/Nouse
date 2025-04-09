@@ -1,34 +1,67 @@
-"use client"
-import React, { useRef, useState } from "react";
-import { FaChevronLeft ,FaChevronRight} from "react-icons/fa";
-
-const initialContent = {
-  title: "Our Projects",
-  subtitle: "Explore our newest project",
-  description: "From vision to reality, on time and with unwavering commitment.",
-  buttonText: "VIEW PROJECT"
-};
-
-const projects = [
-  { id: 1, name: "Mr. Aby and family, Kalady", image: "/banner/shade3.jpg" },
-  { id: 2, name: "Mr. Anil and family, Arayankavu", image: "/banner/shade3.jpg" },
-  { id: 3, name: "Mr. Joseph and family, Kochi", image: "/banner/shade3.jpg" },
-  { id: 4, name: "Mr. Rajeev and family, Trivandrum", image: "/banner/shade3.jpg" },
-];
+"use client";
+import React, { useRef, useState, useEffect } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { getContent } from "../../contentful/page";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 const ThirdSection = () => {
-  const [content] = useState(initialContent);
   const carouselRef = useRef(null);
+  const [projectsData, setProjectsData] = useState({
+    title: "",
+    subtitle: "",
+    description: null, // for rich text
+    buttonText: "",
+    bgImage: "",
+    projects: [],
+  });
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const entries = await getContent("projectsSection");
+
+        if (entries && entries.length > 0) {
+          const section = entries[0].fields;
+          setProjectsData({
+            title: section.title || "",
+            subtitle: section.subtitle || "",
+            description: section.description || null, // store RichText object
+            buttonText: section.buttonText || "",
+            bgImage: section.backgroundImage
+              ? `url(${section.backgroundImage.fields.file.url})`
+              : "",
+            projects: section.projects
+              ? section.projects.map((item) => ({
+                  id: item.sys.id,
+                  name: item.fields.projectName || "",
+                  image: item.fields.projectImage?.fields?.file?.url || "",
+                }))
+              : [],
+          });
+        }
+      } catch (err) {
+        setError(err.message);
+        console.error("Error fetching data:", err);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   const scroll = (direction) => {
     if (carouselRef.current) {
       const scrollAmount = carouselRef.current.offsetWidth / 1.5;
       carouselRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth"
+        behavior: "smooth",
       });
     }
   };
+
+  if (error) {
+    return <div className="text-white">Error loading content: {error}</div>;
+  }
 
   return (
     <div
@@ -36,9 +69,10 @@ const ThirdSection = () => {
       style={{ backgroundImage: "url('/banner/shade3.jpg')" }}
     >
       <div className="flex-col justify-start text-white  py-20 max-w-[50%]">
-        <h1 className="text-4xl font-bold">{content.title}</h1>
-        <p className="text-xl mt-4">{content.description}</p>
-        <p className="text-xl mt-2 font-semibold">{content.subtitle}</p>
+        <h1 className="text-4xl font-bold">{projectsData.title}</h1>
+        {projectsData.description &&
+          documentToReactComponents(projectsData.description)}
+        <p className="text-xl mt-2 font-semibold">{projectsData.subtitle}</p>
       </div>
 
       {/* Carousel Container */}
@@ -67,12 +101,12 @@ const ThirdSection = () => {
             }
           `}</style>
           
-          {projects.map((project) => (
+          {projectsData.projects.map((project) => (
             <div key={project.id} className="min-w-[300px] flex-shrink-0 bg-black bg-opacity-80 p-4 rounded-lg">
               <img src={project.image} alt={project.name} className="w-full h-64 object-cover rounded-lg" />
               <h3 className="text-xl text-white mt-4">{project.name}</h3>
               <button className="mt-4 px-4 py-2 bg-white text-black font-semibold rounded-lg hover:bg-gray-300">
-                {content.buttonText}
+                {projectsData.buttonText}
               </button>
             </div>
           ))}
