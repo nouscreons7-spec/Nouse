@@ -4,7 +4,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { getContent } from "../../contentful/page";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
-const ThirdSection = () => {
+const ProjectSection = () => {
   const carouselRef = useRef(null);
   const [projectsData, setProjectsData] = useState({
     title: "",
@@ -124,4 +124,4 @@ const ThirdSection = () => {
   );
 };
 
-export default ThirdSection;
+export default ProjectSection;
