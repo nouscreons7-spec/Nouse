@@ -72,7 +72,7 @@ const SecondSection = () => {
         <FaArrowRight />
       </button>
 
-      {/* Category Selection */}
+   
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3  bg-opacity-30 p-2 rounded-lg">     
          {categoryKeys.map((category, index) => (
           <button
