@@ -1,23 +1,23 @@
-import Image from 'next/image';
 
-const Message = ({backgroundImage,text}) => {
-  // Dummy data
- 
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+
+const Message = ({ messageData }) => {
+  const backgroundImageUrl = messageData?.backgroundImage?.fields?.file?.url;
+
+  // Extract the full rich text document (not the innermost value)
+  const textDocument = messageData?.text;
+
   return (
     <div
-    className="relative flex min-h-screen bg-cover bg-center text-center bg-transparent"
-    style={{ backgroundImage: `url(${backgroundImage})` }}
-  >
-    {/* Overlay */}
-   
-    {/* Text Content */}
-    <div className="relative max-w-xl px-10">
-      <h1 className="text-white text-4xl font-bold  py-20">
-        {text}
-      </h1>
+      className="relative flex min-h-screen bg-cover bg-center bg-transparent"
+      style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+    >
+      <div className="relative max-w-2xl px-10">
+        <div className="text-white text-3xl font-bold py-20">
+          {documentToReactComponents(textDocument)}
+        </div>
+      </div>
     </div>
-  </div>
-  
   );
 };
 

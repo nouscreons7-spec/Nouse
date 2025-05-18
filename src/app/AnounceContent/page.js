@@ -1,16 +1,20 @@
 import React from "react";
 
-const AnnounceContent = ({ backgroundImage, title, buttonText, buttonLink }) => {
+const AnnounceContent = ({ announcementData }) => {
+  const backgroundImageUrl = announcementData?.
+  bgimage?.fields?.file?.url;
   return (
     <div
       className="relative flex items-center justify-center min-h-[400px] bg-cover bg-center px-6 text-center"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      style={{ backgroundImage: `url(${backgroundImageUrl})` }}
     >
-      <div className="">
-        <h2 className="text-white text-6xl font-semibold">{title}</h2>
-        <a href={buttonLink} className="inline-block mt-10">
+      <div>
+        <h2 className="text-white text-6xl font-semibold">
+          {announcementData.title}
+        </h2>
+        <a href={announcementData.buttonLink} className="inline-block mt-10">
           <button className="px-6 py-3 bg-black text-white font-semibold rounded-lg hover:bg-gray-800">
-            {buttonText}
+            {announcementData.buttonText}
           </button>
         </a>
       </div>

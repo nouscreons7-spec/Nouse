@@ -9,7 +9,7 @@ const ProjectSection = () => {
   const [projectsData, setProjectsData] = useState({
     title: "",
     subtitle: "",
-    description: null, // for rich text
+    description: null,
     buttonText: "",
     bgImage: "",
     projects: [],

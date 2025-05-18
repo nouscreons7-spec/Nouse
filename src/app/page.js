@@ -11,11 +11,12 @@ import FeatureSection from "./FeatureSection/page";
 import TestimonialSection from "./TestimonialSection/page";
 import EnsureSection from "./EnsureSection/page";
 import Advertisement from "./advertisement/page";
+import Content from "./pages/content/page";
 
 
 const Home = () => {
   const navItems = [
-    { label: "Architecture", link: "#architecture" },
+    { label: "Architecture", link: "/pages/content" },
     { label: "Construction", link: "#construction" },
     { label: "Interior", link: "#interior" },
     { label: "Turnkey Projects", link: "#turnkey" },
@@ -35,7 +36,7 @@ const Home = () => {
       <Banner />
       <Firstsection />
       <ProjectSection />
-      <AnnounceContent  backgroundImage ="/img/grat.jpeg" title="Have a project in mind?" buttonText="talk to us today" buttonLink="/"  />
+      {/* <AnnounceContent  backgroundImage ="/img/grat.jpeg" title="Have a project in mind?" buttonText="talk to us today"  /> */}
       <Message backgroundImage={heroData.backgroundImage} text={heroData.text}/>
       <WhyNous />
       <FeatureSection />
@@ -43,9 +44,10 @@ const Home = () => {
       <TestimonialSection />
       <EnsureSection />
       <Advertisement />
-      <AnnounceContent  backgroundImage ="/img/grat.jpeg" title="Let's collaborate on a project" buttonText="Give us a call now" buttonLink="/"  />
+      {/* <AnnounceContent  backgroundImage ="/img/grat.jpeg" title="Let's collaborate on a project" buttonText="Give us a call now" buttonLink="/"  /> */}
 
      <Footer />
+     {/* <Content /> */}
     </div>
   );
 };
