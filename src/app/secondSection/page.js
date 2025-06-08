@@ -27,7 +27,7 @@ const categories = {
   },
 };
 
-const SecondSection = () => {
+const SlidingProjects = () => {
   const categoryKeys = Object.keys(categories);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -92,4 +92,4 @@ const SecondSection = () => {
   );
 };
 
-export default SecondSection;
+export default SlidingProjects;

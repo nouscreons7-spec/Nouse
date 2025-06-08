@@ -10,15 +10,15 @@ const ParagraphSection = ({ paragraphSectionData }) => {
       }}
     >
       <div className=" mx-auto  max-w-[80%]">
-        <h4 className="text-gray-500 text-3xl tracking-widest mb-8 uppercase">
+        <div className="text-gray-500 text-3xl tracking-widest mb-8 uppercase">
           {paragraphSectionData.subTitle}
-        </h4>
-        <h1 className="text-6xl  leading-tight mb-10">
+        </div>
+        <div className="text-6xl  leading-tight mb-10">
           {paragraphSectionData.title}
-        </h1>
-        <h5 className="text-xl text-gray-700">
+        </div>
+        <div className="text-xl text-gray-700">
         {documentToReactComponents(paragraphSectionData.description)}
-        </h5>
+        </div>
       </div>
     </div>
   );

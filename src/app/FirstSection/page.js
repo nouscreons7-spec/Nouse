@@ -1,6 +1,6 @@
-import SecondSection from "../secondSection/page";
+import SlidingProjects from "../secondSection/page";
 
-const FirstSection = () => {
+const CompletedProjects = () => {
     const data = {
       title: "WHAT WE DO",
       subtitle: "We will help you build your dream home",
@@ -23,10 +23,10 @@ const FirstSection = () => {
         </h1>
         <p className="text-lg text-gray-700 mt-6 mb-20 ">{data.description}</p>
         </div>
-        <SecondSection />
+        <SlidingProjects />
       </div>
     );
   };
   
-  export default FirstSection;
+  export default CompletedProjects;
   

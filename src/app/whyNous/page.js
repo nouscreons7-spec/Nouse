@@ -3,8 +3,8 @@ import Image from 'next/image';
 const WhyNous = () => {
   // Dynamic Data
   const data = {
-    backgroundImage: "/section2img/home2.jpg",  // Path from public folder
-    title: "WHY CREO",
+    backgroundImage: "/section2img/home4.jpg",  // Path from public folder
+    title: "WHY Nous",
     heading: "Experience, excellence and commitment",
     description:
       "Guided by our years of experience, we build you customised luxurious homes which suit your needs and personality.",

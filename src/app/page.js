@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header/page";
 import Banner from "./HomeBanner/page";
-import Firstsection from "./FirstSection/page";
+import CompletedProjects from "./FirstSection/page";
 import ProjectSection from "./ProjectSection/page";
 import AnnounceContent from "./AnounceContent/page";
 import Footer from "./Footer/page";
@@ -34,13 +34,13 @@ const Home = () => {
     <div>
       <Header navItems={navItems} contactNumber="+91 9645 899 951" quoteText="Get a quote" />
       <Banner />
-      <Firstsection />
+      <CompletedProjects />
       <ProjectSection />
       {/* <AnnounceContent  backgroundImage ="/img/grat.jpeg" title="Have a project in mind?" buttonText="talk to us today"  /> */}
-      <Message backgroundImage={heroData.backgroundImage} text={heroData.text}/>
+      {/* <Message backgroundImage={heroData.backgroundImage} text={heroData.text}/> */}
       <WhyNous />
       <FeatureSection />
-      <Message backgroundImage={story.backgroundImage} text={story.text}/> 
+      {/* <Message backgroundImage={story.backgroundImage} text={story.text}/>  */}
       <TestimonialSection />
       <EnsureSection />
       <Advertisement />
