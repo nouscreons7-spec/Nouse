@@ -38,8 +38,9 @@ const Footer = () => {
       <div className="container mx-auto px-6">
         <div className="flex">
           {/* Logo Section */}
-          <div className="w-[20%] bg-red-400 flex flex-col items-center md:items-start p-4">
-            <img src={footerData.logo} alt="Logo" className="w-32" />
+          <div className="w-[20%]  flex flex-col items-center md:items-start p-4">
+          <img src="/logo/lgo.png" alt="Creo Homes" className="h-32 w-40 color-black" />
+
           </div>
       
           {/* Main Content */}

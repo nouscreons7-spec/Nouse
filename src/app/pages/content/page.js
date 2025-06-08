@@ -11,7 +11,8 @@ import Message from "@/app/Message/page";
 import ArchitectureShowcase from "./ArchitectureShowcase/page";
 import FeatureGrid from "./FeatureGrid/page";
 import AnnounceContent from "@/app/AnounceContent/page";
-
+import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 const Content = () => {
   const [contentData, setContentData] = useState({
     navItems: [],
@@ -28,11 +29,12 @@ const Content = () => {
   });
 
   const [error, setError] = useState(null);
-
+  const searchParams = useSearchParams();
+  const keyword = searchParams.get('keyword');
   useEffect(() => {
     async function fetchData() {
       try {
-        const entries = await getContent("Architecture");
+        const entries = await getContent(keyword);
 
         if (entries.length > 0) {
           const fields = entries[0].fields;
@@ -58,7 +60,7 @@ const Content = () => {
     }
 
     fetchData();
-  }, []);
+  }, [keyword]);
 
   console.log(contentData.secondMessageData, "secondMessageData");
 

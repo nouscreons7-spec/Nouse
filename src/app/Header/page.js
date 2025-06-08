@@ -8,7 +8,11 @@ import Drawer from "../Drawer/page";
 const Header = ({ quoteText, navItems }) => {
   const [showDrawer, setShowDrawer] = useState(false);
   const onClose = () => setShowDrawer(false);
+
 const router = useRouter()
+const viewContentPage = (page) => {
+  router.push(`/pages/content?keyword=${page}`);
+};
   return (
     <header className="absolute top-0 left-0 w-full h-[20%] z-10 bg-gradient-to-b from-black/80 to-transparent text-white p-4 flex items-center">
       <Drawer isOpen={showDrawer} onClose={onClose} />
@@ -20,13 +24,14 @@ const router = useRouter()
      
       <nav className="hidden md:flex justify-evenly w-full items-center font-bold">
         {navItems?.map((item, index) => (
-          <a
+          <div
             key={index}
-            href={item.link}
+            // href={item.link}
             className="hover:text-gray-300 transition cursor-pointer"
+            onClick={() => viewContentPage(item.label)}
           >
             {item.label}
-          </a>
+          </div>
         ))}
 
         
