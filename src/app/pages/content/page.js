@@ -11,26 +11,24 @@ import Message from "@/app/Message/page";
 import ArchitectureShowcase from "./ArchitectureShowcase/page";
 import FeatureGrid from "./FeatureGrid/page";
 import AnnounceContent from "@/app/AnounceContent/page";
-import { useRouter } from 'next/navigation';
-import { useSearchParams } from 'next/navigation';
+import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 const Content = () => {
   const [contentData, setContentData] = useState({
     navItems: [],
     sliderData: {},
     paragraphSectionData: {},
     status: [],
-    secondMessageData:{},
+    secondMessageData: {},
     architechData: {},
     features: {},
     announcementData: {},
     messageData: {},
-  
-  
   });
 
   const [error, setError] = useState(null);
   const searchParams = useSearchParams();
-  const keyword = searchParams.get('keyword');
+  const keyword = searchParams.get("keyword");
   useEffect(() => {
     async function fetchData() {
       try {
@@ -50,7 +48,6 @@ const Content = () => {
             announcementData: fields.announcementData?.fields || {},
             messageData: fields.messageData?.fields || {},
             secondMessageData: fields.secondMessageData?.fields || {},
-           
           }));
         }
       } catch (err) {
@@ -68,22 +65,7 @@ const Content = () => {
     <div>
       {contentData ? (
         <>
-          {contentData.navItems.length > 0 &&
-            contentData.navItems.map((item, index) => {
-              const quote = item.quoteText;
-              const cleanedNavItems = item.items.map((nav) => ({
-                label: nav.fields.label,
-                link: nav.fields.link,
-              }));
-
-              return (
-                <Header
-                  key={index}
-                  navItems={cleanedNavItems}
-                  quoteText={quote}
-                />
-              );
-            })}
+          <Header />
         </>
       ) : (
         "no data found"
@@ -115,12 +97,12 @@ const Content = () => {
       Object.keys(contentData.messageData).length > 0 ? (
         <Message messageData={contentData.messageData} />
       ) : null}
-       {contentData.announcementData &&
+      {contentData.announcementData &&
       Object.keys(contentData.announcementData).length > 0 ? (
         <AnnounceContent announcementData={contentData.announcementData} />
       ) : null}
 
-   <Footer />
+      <Footer />
     </div>
   );
 };

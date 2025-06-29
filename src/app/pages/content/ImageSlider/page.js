@@ -20,13 +20,13 @@ const Slider = ({ images,title,description}) => {
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden ">
+    <div className="relative w-full h-screen overflow-hidden bg-red-300">
       {getImageUrl(current) && (
         <img
           src={getImageUrl(current)}
           alt={title || "Slider Image"}
         
-          className="object-cover transition-all duration-700"
+          className="object-cover w-full h-screen transition-all duration-700"
         />
       )}
 

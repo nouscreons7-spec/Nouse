@@ -10,24 +10,16 @@ const contactData = {
   factoryAddress: "Kadungalloor, Valanjambalam Junction, Aluva",
   mail: "info@creohomes.in",
   phoneNumbers: ["+919645899951", "+919645899952", "+919645899953"],
-  bgimage: "/section2img/home1.jpg", // make sure this image exists in your public folder
-  image: `/banner/shade3.jpg`, // make sure this image exists in your public folder
+  bgimage: "/section2img/home1.jpg", 
+  image: `/banner/shade3.jpg`, 
   title: "Contact Us",
   subtitle: "We'd love to hear from you!",
 };
-const navItems = [
-  { label: "Architecture", link: "/pages/content" },
-  { label: "construction", link: "#construction" },
-  { label: "Interior", link: "#interior" },
-  { label: "Turnkey Projects", link: "#turnkey" },
-];
 const ContactUs = () => {
   return (
     <div>
    <Header
-        navItems={navItems}
-        contactNumber="+91 9645 899 951"
-        quoteText="Get a quote"
+       
       />
       <BanenerComponent data={contactData} />
       <div
