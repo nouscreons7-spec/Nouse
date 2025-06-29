@@ -1,50 +1,94 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FiMenu } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import Drawer from "../Drawer/page";
+import { getContent } from "@/contentful/page";
+import LoadingSpinner from "../LoadingSpinner/page";
 
-const Header = ({ quoteText, navItems }) => {
+const Header = () => {
   const [showDrawer, setShowDrawer] = useState(false);
-  const onClose = () => setShowDrawer(false);
+  const [navData, setNavData] = useState({
+    text: "",
+    navItems: [],
+    logoUrl: "",
+  });
+  const router = useRouter();
 
-const router = useRouter()
-const viewContentPage = (page) => {
-  router.push(`/pages/content?keyword=${page}`);
-};
+  const onClose = () => setShowDrawer(false);
+  // const backgroundImageUrl = status[0]?.backgroundImage?.fields?.file?.url;
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const entries = await getContent("navItemGroup");
+
+        if (entries.length > 0) {
+          const fields = entries[0].fields;
+
+          // LOG to understand the structure
+          console.log("Fetched fields:", fields);
+
+          setNavData({
+            text: fields.quoteText || "",
+            navItems:
+              fields.items?.map((item) => ({
+                label: item.fields.label || item.fields.title || "Unnamed",
+              })) || [],
+            logoUrl: fields.logo?.fields?.file?.url || "",
+          });
+        }
+      } catch (err) {
+        console.error("Error fetching nav data:", err.message);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  const viewContentPage = (page) => {
+    router.push(`/pages/content?keyword=${page}`);
+  };
+
   return (
-    <header className="absolute top-0 left-0 w-full h-[20%] z-10 bg-gradient-to-b from-black/80 to-transparent text-white p-4 flex items-center">
+    <header className="fixed top-0 left-0 w-full h-[20%] z-10 bg-gradient-to-b from-black/80 to-transparent text-white p-4 flex items-center justify-between">
       <Drawer isOpen={showDrawer} onClose={onClose} />
 
-      <div onClick={()=> router.push("/")} className=" cursor-pointer flex justify-center text-2xl font-bold items-center w-[20%]">
-        <img src="/logo/lgo.png" alt="Creo Homes" className="h-32 w-40" />
+      <div
+        onClick={() => router.push("/")}
+        className="cursor-pointer flex items-center md:justify-start text-2xl font-bold w-auto md:w-[20%]"
+      >
+        {navData.logoUrl ? (
+          <img src={`https:${navData.logoUrl}`} alt="" className="h-40 w-40" />
+        ) : (
+          <LoadingSpinner />
+        )}
       </div>
 
-     
-      <nav className="hidden md:flex justify-evenly w-full items-center font-bold">
-        {navItems?.map((item, index) => (
+      {/* Desktop Navigation */}
+      <nav className="hidden md:flex justify-evenly items-center w-full font-bold space-x-6">
+        {navData.navItems.map((item, index) => (
           <div
             key={index}
-            // href={item.link}
             className="hover:text-gray-300 transition cursor-pointer"
             onClick={() => viewContentPage(item.label)}
           >
-            {item.label}
+            {item.label.toUpperCase()}
           </div>
         ))}
 
-        
-
         <button className="bg-yellow-100 text-black px-4 py-2 rounded-lg font-semibold cursor-pointer">
-          {quoteText}
+          {navData.text}
         </button>
+      </nav>
 
+      {/* Mobile Menu Button */}
+      <div className="md:hidden">
         <FiMenu
-          className="text-white text-2xl cursor-pointer"
+          className="text-white text-3xl cursor-pointer"
           onClick={() => setShowDrawer(true)}
         />
-      </nav>
+      </div>
     </header>
   );
 };

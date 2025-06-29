@@ -15,12 +15,7 @@ import Content from "../pages/content/page";
 
 
 const Home = () => {
-  const navItems = [
-    { label: "Architecture", link: "/pages/content" },
-    { label: "construction", link: "/pages/content" },
-    { label: "Interior", link: "/pages/content" },
-    { label: "Turnkey Projects", link: "/pages/content" },
-  ];
+
   const heroData = {
     backgroundImage: "/banner/shade3.jpg",
     text: "A space to recharge life's batteries."
@@ -32,7 +27,7 @@ const Home = () => {
 
   return (
     <div>
-      <Header navItems={navItems} contactNumber="+91 9645 899 951" quoteText="Get a quote" />
+      <Header  />
       <Banner />
       <CompletedProjects />
       <ProjectSection />

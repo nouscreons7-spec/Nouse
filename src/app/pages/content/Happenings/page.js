@@ -3,12 +3,6 @@ import AnnounceContent from "@/app/AnounceContent/page";
 import Footer from "@/app/Footer/page";
 import BanenerComponent from "@/app/BannerComponent/page";
 const Happenings = () => {
-  const navItems = [
-    { label: "Architecture", link: "/pages/content" },
-    { label: "construction", link: "#construction" },
-    { label: "Interior", link: "#interior" },
-    { label: "Turnkey Projects", link: "#turnkey" },
-  ];
   const data = {
     image: "/banner/shade1.jpg",
     title: "Happenings",
@@ -30,9 +24,7 @@ const Happenings = () => {
   return (
     <div>
       <Header
-        navItems={navItems}
-        contactNumber="+91 9645 899 951"
-        quoteText="Get a quote"
+       
       />
 
       <BanenerComponent data={data} />
