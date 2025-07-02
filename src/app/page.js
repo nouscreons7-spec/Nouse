@@ -7,9 +7,9 @@ const Root = () => {
 
 
   return (
-   // <Home />
+    <Home />
   // <Happenings />
-   <ContactUs />
+  //  <ContactUs />
   );
 };
 

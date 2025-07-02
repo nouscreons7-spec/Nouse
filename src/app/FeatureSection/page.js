@@ -24,6 +24,7 @@ const featuresData = [
     description:
       "We handle all aspects of the construction process, from design conception to construction completion and provide unmatched construction project management.",
   },
+  
 ];
 
 const FeatureSection = () => {

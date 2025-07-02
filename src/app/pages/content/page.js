@@ -1,7 +1,9 @@
 "use client";
+
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { getContent } from "@/contentful/page";
-import React from "react";
+
 import Header from "@/app/Header/page";
 import Footer from "@/app/Footer/page";
 import ImageSlider from "./ImageSlider/page";
@@ -11,99 +13,86 @@ import Message from "@/app/Message/page";
 import ArchitectureShowcase from "./ArchitectureShowcase/page";
 import FeatureGrid from "./FeatureGrid/page";
 import AnnounceContent from "@/app/AnounceContent/page";
-import { useRouter } from "next/navigation";
-import { useSearchParams } from "next/navigation";
-const Content = () => {
-  const [contentData, setContentData] = useState({
-    navItems: [],
-    sliderData: {},
-    paragraphSectionData: {},
-    status: [],
-    secondMessageData: {},
-    architechData: {},
-    features: {},
-    announcementData: {},
-    messageData: {},
-  });
+import LoadingSpinner from "@/app/LoadingSpinner/page";
 
+const Content = () => {
+  const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-  const searchParams = useSearchParams();
-  const keyword = searchParams.get("keyword");
+  const keyword = useSearchParams().get("keyword");
+
   useEffect(() => {
     async function fetchData() {
       try {
         const entries = await getContent(keyword);
-
-        if (entries.length > 0) {
-          const fields = entries[0].fields;
-          console.log("Got entries:", entries);
-          setContentData((prevData) => ({
-            ...prevData,
-            navItems: fields.navItems?.map((item) => item.fields) || [],
-            sliderData: fields.sliderData?.fields || {},
-            paragraphSectionData: fields.paragraphSectionData?.fields || {},
-            status: fields.status?.map((item) => item.fields) || [],
-            architechData: fields.architechData?.fields || {},
-            features: fields.features?.fields || {},
-            announcementData: fields.announcementData?.fields || {},
-            messageData: fields.messageData?.fields || {},
-            secondMessageData: fields.secondMessageData?.fields || {},
-          }));
-        }
+        const fields = entries[0]?.fields || {};
+        setData({
+          navItems: fields.navItems?.map((i) => i.fields) || [],
+          sliderData: fields.sliderData?.fields,
+          paragraphSectionData: fields.paragraphSectionData?.fields,
+          status: fields.status?.map((i) => i.fields) || [],
+          secondMessageData: fields.secondMessageData?.fields,
+          architechData: fields.architechData?.fields,
+          features: fields.features?.fields,
+          announcementData: fields.announcementData?.fields,
+          messageData: fields.messageData?.fields,
+        });
       } catch (err) {
         setError(err.message);
-        console.error("Error fetching Architecture content:", err);
+        console.error("Error fetching content:", err);
       }
     }
 
-    fetchData();
+    if (keyword) fetchData();
   }, [keyword]);
 
-  console.log(contentData.secondMessageData, "secondMessageData");
+  if (error) return <div className="text-red-600 p-6">Error: {error}</div>;
+  if (!data) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  const {
+    sliderData,
+    paragraphSectionData,
+    status,
+    secondMessageData,
+    architechData,
+    features,
+    messageData,
+    announcementData,
+  } = data;
 
   return (
-    <div>
-      {contentData ? (
-        <>
-          <Header />
-        </>
-      ) : (
-        "no data found"
+    <>
+      <Header />
+
+      {sliderData && (
+        <ImageSlider
+          images={sliderData.images}
+          title={sliderData.title}
+          description={sliderData.description}
+        />
       )}
-      <ImageSlider
-        images={contentData.sliderData.images}
-        title={contentData.sliderData.title}
-        description={contentData.sliderData.description}
-      />
-      {contentData.paragraphSectionData &&
-        contentData.paragraphSectionData.backgroundImage?.fields?.file?.url && (
-          <ParagraphSection
-            paragraphSectionData={contentData.paragraphSectionData}
-          />
-        )}
-      <Status status={contentData.status} />
-      {contentData.secondMessageData &&
-      Object.keys(contentData.secondMessageData).length > 0 ? (
-        <Message messageData={contentData.secondMessageData} />
-      ) : null}
-      {contentData.architechData &&
-      Object.keys(contentData.architechData).length > 0 ? (
-        <ArchitectureShowcase architechData={contentData.architechData} />
-      ) : null}
-      {contentData.features && Object.keys(contentData.features).length > 0 ? (
-        <FeatureGrid features={contentData.features} />
-      ) : null}
-      {contentData.messageData &&
-      Object.keys(contentData.messageData).length > 0 ? (
-        <Message messageData={contentData.messageData} />
-      ) : null}
-      {contentData.announcementData &&
-      Object.keys(contentData.announcementData).length > 0 ? (
-        <AnnounceContent announcementData={contentData.announcementData} />
-      ) : null}
+
+      {paragraphSectionData?.backgroundImage?.fields?.file?.url && (
+        <ParagraphSection paragraphSectionData={paragraphSectionData} />
+      )}
+
+      <Status status={status} />
+
+      {secondMessageData && <Message messageData={secondMessageData} />}
+      {architechData && <ArchitectureShowcase architechData={architechData} />}
+      {features && <FeatureGrid features={features} />}
+      {messageData && <Message messageData={messageData} />}
+      {announcementData && (
+        <AnnounceContent announcementData={announcementData} />
+      )}
 
       <Footer />
-    </div>
+    </>
   );
 };
 

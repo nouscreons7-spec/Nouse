@@ -7,7 +7,7 @@ const client = createClient({
 
 export async function getContent(contentType) {
   try {
-    const res = await client.getEntries({ content_type: contentType,  include: 10, });
+    const res = await client.getEntries({ content_type: contentType,  include: 3, });
     console.log("✅ Contentful API Response:", res.items);
     return res.items;
   } catch (error) {
