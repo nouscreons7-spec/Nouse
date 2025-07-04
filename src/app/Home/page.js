@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../Header/page";
 import Banner from "../HomeBanner/page";
-import CompletedProjects from "../FirstSection/page";
+import CompletedProjects from "../CompletedProjects/page";
 import ProjectSection from "../ProjectSection/page";
 import AnnounceContent from "../AnounceContent/page";
 import Footer from "../Footer/page";
@@ -23,7 +23,7 @@ const Home = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const entries = await getContent("homePage"); 
+        const entries = await getContent("homePage");
         const fields = entries[0]?.fields;
 
         setHomeData({
@@ -47,49 +47,32 @@ const Home = () => {
     fetchData();
   }, []);
 
-    if (!homeData) {
+  if (!homeData) {
     return (
       <div className="flex items-center justify-center h-screen">
         <LoadingSpinner />
       </div>
     );
   }
+  console.log("Home Data:", homeData);
 
   return (
     <div>
       <Header />
       <Banner data={homeData.homebanner} />
+
       <CompletedProjects data={homeData.finishedprojects} />
+
       <ProjectSection data={homeData.projectsSection} />
-      <AnnounceContent
-      announcementData={homeData.announcementData}
-        // backgroundImage={homeData.announcementData.backgroundImage}
-        // title={homeData.announcementData.title}
-        // buttonText={homeData.announcementData.buttonText}
-        // buttonLink={homeData.announcementData.buttonLink}
-      />
-      <Message
-      messageData={homeData.messageData}
-        // backgroundImage={homeData.messageData.backgroundImage}
-        // text={homeData.messageData.text}
-      />
+      <AnnounceContent announcementData={homeData.announcementData} />
+      <Message messageData={homeData.messageData} />
       <WhyNous data={homeData.paragraphSectionData} />
       <FeatureSection data={homeData.featuresData} />
-      <Message
-      messageData={homeData.secondMessageData}
-        // backgroundImage={homeData.secondMessageData.backgroundImage}
-        // text={homeData.secondMessageData.text}
-      />
+      <Message messageData={homeData.secondMessageData} />
       <TestimonialSection data={homeData.testimonialSection} />
       <EnsureSection />
       <Advertisement />
-      <AnnounceContent
-    announcementData={homeData.secondAnnouncementData}
-        // backgroundImage={homeData.secondAnnouncementData.backgroundImage}
-        // title={homeData.secondAnnouncementData.title}
-        // buttonText={homeData.secondAnnouncementData.buttonText}
-        // buttonLink={homeData.secondAnnouncementData.buttonLink}
-      />
+      <AnnounceContent announcementData={homeData.secondAnnouncementData} />
       <Footer />
     </div>
   );

@@ -1,62 +1,42 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { getContent } from "../../contentful/page";
 
-const Banner = ({ interval = 5000 }) => {
+const Banner = ({ data, interval = 5000 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [bannerData, setBannerData] = useState({ text: "", images: [] });
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const entries = await getContent("homebanner"); 
-        
-        if (entries.length > 0) {
-          const fields = entries[0].fields;
-          setBannerData({
-            text: fields.Bannertext || "",
-            images: fields.bannerimages.map((img) => img.fields.file.url) || [],
-          });
-        }
-      } catch (err) {
-        setError(err.message);
-      }
-    }
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    if (bannerData.images.length === 0) return;
+    if (!data?.bannerimages || data.bannerimages.length === 0) return;
 
     const timer = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % bannerData.images.length);
+      setCurrentImageIndex(
+        (prevIndex) => (prevIndex + 1) % data.bannerimages.length
+      );
     }, interval);
 
     return () => clearInterval(timer);
-  }, [bannerData.images, interval]);
+  }, [data?.bannerimages, interval]);
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  if (bannerData.images.length === 0) {
+  if (!data?.bannerimages || data.bannerimages.length === 0) {
     return <div>Loading...</div>;
   }
+
+  const currentImageObj = data.bannerimages[currentImageIndex];
+  const imageUrl = currentImageObj?.fields?.file?.url
+    ? `https:${currentImageObj.fields.file.url}`
+    : "";
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
       <div className="absolute inset-0 transition-all duration-[5000ms] scale-100 animate-zoom">
         <img
-          src={bannerData.images[currentImageIndex]}
+          src={imageUrl}
           alt="Home Banner"
           className="w-full h-full object-cover"
         />
       </div>
 
       <h1 className="absolute bottom-10 left-10 text-white text-4xl font-bold">
-        {bannerData.text || "We build your dream home"}
+        {data.Bannertext || "We build your dream home"}
       </h1>
 
       <style>
