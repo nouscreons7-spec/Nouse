@@ -64,21 +64,24 @@ const ProjectSection = ({ data }) => {
 
             return (
               <div
-                key={project.sys?.id || idx}
-                className="min-w-[300px] flex-shrink-0  bg-opacity-80 p-4 rounded-lg"
-              >
-                <img
-                  src={imageUrl}
-                  alt={name}
-                  className="w-full h-64 object-cover rounded-lg"
-                />
-                <h3 className="text-xl text-white mt-4">{name}</h3>
-                {data.buttonText && (
-                  <button className="mt-4 px-4 py-2 bg-white text-black font-semibold rounded-lg hover:bg-gray-300">
+              key={project.sys?.id || idx}
+              className=" min-w-[300px] flex-shrink-0 bg-opacity-80 p-4 rounded-lg bg-black/30 sm:min-w-[250px] md:min-w-[300px]"
+            >
+              <img
+                src={imageUrl}
+                alt={name}
+                className="w-full h-64 object-cover rounded-lg"
+              />
+              <h3 className="text-xl text-white mt-4">{name}</h3>
+              {data.buttonText && (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <button className="px-4 py-2 bg-white text-black font-semibold rounded-lg hover:bg-gray-300 w-full sm:w-auto">
                     {data.buttonText}
                   </button>
-                )}
-              </div>
+                </div>
+              )}
+            </div>
+            
             );
           })}
         </div>

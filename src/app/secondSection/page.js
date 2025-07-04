@@ -52,19 +52,23 @@ const SlidingProjects = ({ categories }) => {
       </button>
 
       {/* Category Buttons */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 p-2 rounded-lg bg-opacity-30">
-        {categories.map((cat, index) => (
-          <button
-            key={cat.fields?.key || index}
-            onClick={() => setSelectedIndex(index)}
-            className={`cursor-pointer px-4 py-2 rounded-lg text-white text-xs w-36 h-10 ${
-              selectedIndex === index ? "bg-gray-900" : "bg-gray-800 hover:bg-gray-700"
-            }`}
-          >
-            {(cat.fields?.key || `Category ${index + 1}`).toUpperCase()}
-          </button>
-        ))}
-      </div>
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-[60%] max-w-4xl p-4 bg-opacity-30 rounded-lg grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 w-[80%]">
+  {categories.map((cat, index) => (
+    <button
+      key={cat.fields?.key || index}
+      onClick={() => setSelectedIndex(index)}
+      className={`cursor-pointer px-4 py-2 rounded-lg text-white text-xs w-full h-10 ${
+        selectedIndex === index
+          ? "bg-gray-900"
+          : "bg-gray-800 hover:bg-gray-700"
+      }`}
+    >
+      {(cat.fields?.key || `Category ${index + 1}`).toUpperCase()}
+    </button>
+  ))}
+</div>
+
+
     </div>
   );
 };
