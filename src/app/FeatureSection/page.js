@@ -4,7 +4,7 @@ import React from "react";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 const FeatureSection = ({ data }) => {
   if (!data || !data.items) {
-    return null; // Or loading/fallback UI
+    return null; 
   }
 
   const backgroundImage = `https:${data.bgimage.fields.file.url}`;

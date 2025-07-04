@@ -1,6 +1,7 @@
 import React from "react";
 
 const AnnounceContent = ({ announcementData }) => {
+  if (!announcementData) return null;
   const backgroundImageUrl = announcementData?.
   bgimage?.fields?.file?.url;
   return (

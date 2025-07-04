@@ -1,6 +1,7 @@
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 const FeatureGrid = ({ features }) => {
+  if (!features) return null;
   const backgroundImageUrl = features?.bgimage?.fields?.file?.url;
   return (
     <div
