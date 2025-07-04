@@ -2,6 +2,7 @@
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 const ParagraphSection = ({ paragraphSectionData }) => {
+  if (!paragraphSectionData) return null;
   return (
     <div
       className="relative w-full py-20 px-4 md:px-20 bg-cover bg-center"

@@ -1,4 +1,5 @@
 const Status = ({ status }) => {
+  if (!status) return null;
   const backgroundImageUrl = status[0]?.backgroundImage?.fields?.file?.url;
 
   return (

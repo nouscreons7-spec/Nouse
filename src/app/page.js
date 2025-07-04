@@ -1,13 +1,16 @@
-import React from "react";
+import React, { Suspense } from 'react';
 import Home from "./Home/page";
 import Happenings from "./pages/content/Happenings/page";
 import ContactUs from "./pages/content/ContactUs/page";
+import LoadingSpinner from "./LoadingSpinner/page";
 
 const Root = () => {
 
 
   return (
-    <Home />
+    <div>
+    <Suspense fallback={<div><LoadingSpinner /></div>}>
+    <Home /></Suspense></div>
   // <Happenings />
   //  <ContactUs />
   );

@@ -2,6 +2,7 @@
 import { useState } from "react";
 
 const ArchitectureShowcase = ({ architechData }) => {
+  if (!architechData) return null;
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {

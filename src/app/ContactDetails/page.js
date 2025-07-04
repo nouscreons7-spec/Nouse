@@ -1,4 +1,5 @@
 const ContactDetails = ({ data }) => {
+  if (!data) return null;
     return (
       <div className="w-full lg:w-1/2 p-6 lg:p-10">
         <div className="bg-white bg-opacity-80 shadow-lg rounded-xl p-6 md:p-10 text-gray-800 space-y-8">

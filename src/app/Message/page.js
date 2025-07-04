@@ -2,6 +2,7 @@
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 const Message = ({ messageData }) => {
+  if (!messageData) return null;
   const backgroundImageUrl = messageData?.backgroundImage?.fields?.file?.url;
 
   // Extract the full rich text document (not the innermost value)
