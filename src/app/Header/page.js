@@ -27,7 +27,7 @@ const Header = () => {
           const fields = entries[0].fields;
 
           // LOG to understand the structure
-          console.log("Fetched fields:", fields);
+          
 
           setNavData({
             text: fields.quoteText || "",
