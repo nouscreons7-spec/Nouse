@@ -7,7 +7,7 @@ const HomeIcons = () => {
   const [showQuote, setShowQuote] = useState(false);
 
   const data = {
-    number: 7306166816,
+    number: 7308649064,
     whatsapp:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcIdwJhbxfm9u60aSNr0OXAGMgWwpeqSjPCw&s",
     quote:
