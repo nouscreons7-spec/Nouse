@@ -4,7 +4,7 @@ import ContentPage from "./contentPage";
 
 export default function Content() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense >
       <ContentPage />
     </Suspense>
   );

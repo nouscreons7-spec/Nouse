@@ -16,10 +16,6 @@ const Banner = ({ data, interval = 5000 }) => {
     return () => clearInterval(timer);
   }, [data?.bannerimages, interval]);
 
-  if (!data?.bannerimages || data.bannerimages.length === 0) {
-    return <div>Loading...</div>;
-  }
-
   const currentImageObj = data.bannerimages[currentImageIndex];
   const imageUrl = currentImageObj?.fields?.file?.url
     ? `https:${currentImageObj.fields.file.url}`

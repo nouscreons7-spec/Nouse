@@ -9,6 +9,7 @@ import LoadingSpinner from "../LoadingSpinner/page";
 
 const Header = () => {
   const [showDrawer, setShowDrawer] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [navData, setNavData] = useState({
     text: "",
     navItems: [],
@@ -17,7 +18,7 @@ const Header = () => {
   const router = useRouter();
 
   const onClose = () => setShowDrawer(false);
-  // const backgroundImageUrl = status[0]?.backgroundImage?.fields?.file?.url;
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -25,9 +26,6 @@ const Header = () => {
 
         if (entries.length > 0) {
           const fields = entries[0].fields;
-
-          // LOG to understand the structure
-          
 
           setNavData({
             text: fields.quoteText || "",
@@ -46,12 +44,28 @@ const Header = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const viewContentPage = (page) => {
     router.push(`/pages/content?keyword=${page}`);
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full h-[20%] z-10 bg-gradient-to-b from-black/80 to-transparent text-white p-4 flex items-center justify-between">
+    <header
+      className={`fixed top-0 left-0 w-full h-[17%] z-10 p-4 flex items-center justify-between transition-colors duration-300 ${
+        isScrolled
+        ? "bg-white/10 backdrop-blur-sm text-gray-800 shadow-md"
+
+          : "bg-gradient-to-b from-black/80 to-transparent text-white"
+      }`}
+    >
       <Drawer isOpen={showDrawer} onClose={onClose} />
 
       <div
@@ -59,7 +73,7 @@ const Header = () => {
         className="cursor-pointer flex items-center md:justify-start text-2xl font-bold w-auto md:w-[20%]"
       >
         {navData.logoUrl ? (
-          <img src={`https:${navData.logoUrl}`} alt="" className="h-40 w-40" />
+          <img src={`https:${navData.logoUrl}`} alt="Logo" className="h-40 w-40 " />
         ) : (
           <LoadingSpinner />
         )}
@@ -70,22 +84,20 @@ const Header = () => {
         {navData.navItems.map((item, index) => (
           <div
             key={index}
-            className="hover:text-gray-300 transition cursor-pointer"
+            className="hover:text-gray-500 transition cursor-pointer"
             onClick={() => viewContentPage(item.label)}
           >
             {item.label.toUpperCase()}
           </div>
         ))}
-
-        <button className="bg-yellow-100 text-black px-4 py-2 rounded-lg font-semibold cursor-pointer">
-          {navData.text}
-        </button>
       </nav>
 
       {/* Mobile Menu Button */}
       <div className="md:hidden">
         <FiMenu
-          className="text-white text-3xl cursor-pointer"
+          className={`text-3xl cursor-pointer transition-colors duration-300 ${
+            isScrolled ? "text-black" : "text-white"
+          }`}
           onClick={() => setShowDrawer(true)}
         />
       </div>
