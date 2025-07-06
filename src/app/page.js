@@ -11,7 +11,7 @@ const Root = () => {
   return (
     <div>
     <Suspense fallback={<div><LoadingSpinner /></div>}>
-    <Home /></Suspense></div>
+    <LoginPage /></Suspense></div>
   // <Happenings />
   //  <ContactUs />
   );
