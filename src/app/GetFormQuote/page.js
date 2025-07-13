@@ -10,7 +10,6 @@ const GetQuoteForm = () => {
     setLoading(true);
 
     const formData = new FormData(e.target);
-
     const data = {
       name: formData.get("name"),
       email: formData.get("email"),
@@ -37,53 +36,51 @@ const GetQuoteForm = () => {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-4 md:p-12">
-      <div className="bg-white bg-opacity-80 shadow-lg rounded-xl p-6 md:p-10">
+    <div className="w-full max-w-3xl mx-auto p-4 md:p-8">
+      <div className="bg-white bg-opacity-80 shadow-lg rounded-xl p-4 md:p-6">
         {!submitted ? (
           <>
-            <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+            <h2 className="text-xl font-semibold mb-4 text-gray-800">
               Get Your Quote
             </h2>
             <form
               onSubmit={handleSubmit}
-              className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              className="grid grid-cols-1 md:grid-cols-2 gap-3"
             >
-            <div className="col-span-1">
-                <label className="block mb-1 font-medium text-gray-700">
+              <div className="col-span-1">
+                <label className="block mb-1 text-sm font-medium text-gray-700">
                   Your Name
                 </label>
                 <input
                   type="text"
                   name="name"
                   placeholder="Enter your name"
-                  className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                   required
                 />
               </div>
 
-              {/* Email */}
               <div className="col-span-1">
-                <label className="block mb-1 font-medium text-gray-700">
+                <label className="block mb-1 text-sm font-medium text-gray-700">
                   Email
                 </label>
                 <input
                   type="email"
                   name="email"
                   placeholder="Your email"
-                  className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                   required
                 />
               </div>
 
-              {/* Phone with Country Code */}
               <div className="col-span-1 md:col-span-2">
-                <label className="block mb-1 font-medium text-gray-700">
+                <label className="block mb-1 text-sm font-medium text-gray-700">
                   Phone Number
                 </label>
                 <div className="flex gap-2">
                   <select
                     name="countryCode"
-                    className="border border-gray-300 p-3 rounded-lg w-1/4 focus:outline-none"
+                    className="border border-gray-300 p-2 rounded-md w-1/4 focus:outline-none"
                     defaultValue="+91"
                   >
                     <option value="+91">India (+91)</option>
@@ -93,55 +90,53 @@ const GetQuoteForm = () => {
                     type="text"
                     name="number"
                     placeholder="Your number"
-                    className="w-3/4 border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="w-3/4 border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                     required
                   />
                 </div>
               </div>
 
-              {/* Location */}
               <div className="col-span-1">
-                <label className="block mb-1 font-medium text-gray-700">
+                <label className="block mb-1 text-sm font-medium text-gray-700">
                   Plot Location
                 </label>
                 <input
                   type="text"
                   name="location"
                   placeholder="Location of your plot"
-                  className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                 />
               </div>
 
-              {/* Area */}
               <div className="col-span-1">
-                <label className="block mb-1 font-medium text-gray-700">
+                <label className="block mb-1 text-sm font-medium text-gray-700">
                   Approximate Area
                 </label>
                 <input
                   type="text"
                   name="area"
-                  placeholder="Approximate area you're looking for"
-                  className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                  placeholder="Approximate area"
+                  className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                 />
               </div>
 
-              {/* Message full width */}
               <div className="col-span-1 md:col-span-2">
-                <label className="block mb-1 font-medium text-gray-700">
+                <label className="block mb-1 text-sm font-medium text-gray-700">
                   Your Message
                 </label>
                 <textarea
                   name="message"
                   placeholder="Write your message here..."
-                  className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
-                  rows={4}
+                  rows={3}
+                  className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                 />
               </div>
+
               <div className="col-span-1 md:col-span-2">
                 <button
                   type="submit"
                   disabled={loading}
-                  className="cursor-pointer w-full bg-red-600 hover:bg-red-700 transition text-white font-semibold py-3 rounded-lg shadow-lg"
+                  className="cursor-pointer w-full bg-red-600 hover:bg-red-700 transition text-white font-semibold py-2 rounded-md shadow-md"
                 >
                   {loading ? "Sending..." : "Submit"}
                 </button>

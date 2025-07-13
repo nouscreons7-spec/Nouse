@@ -44,7 +44,7 @@ const Drawer = ({ isOpen, onClose }) => {
   return (
     <div>
       <div
-        className={`fixed inset-y-0 right-0 bg-black text-white shadow-md z-20 transform ${
+        className={`fixed inset-y-0 right-0 bg-black text-white shadow-md z-50 transform ${
           isOpen ? "translate-x-0" : "translate-x-full"
         } transition-transform ease-in-out duration-300 p-8 flex flex-col min-h-screen w-[350px] sm:w-[650px] `}
       >
