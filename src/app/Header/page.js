@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Drawer from "../Drawer/page";
 import { getContent } from "@/contentful/page";
 import LoadingSpinner from "../LoadingSpinner/page";
+import LogoImage from "../logo/page";
 
 const Header = () => {
   const [showDrawer, setShowDrawer] = useState(false);
@@ -59,10 +60,9 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full h-[17%] z-10 p-4 flex items-center justify-between transition-colors duration-300 ${
+      className={`fixed top-0 left-0 w-full h-[17%] z-30 p-4 flex items-center justify-between transition-colors duration-300 ${
         isScrolled
-        ? "bg-white/10 backdrop-blur-sm text-gray-800 shadow-md"
-
+          ? "bg-white/10 backdrop-blur-sm text-yellow-500 shadow-md"
           : "bg-gradient-to-b from-black/80 to-transparent text-white"
       }`}
     >
@@ -73,7 +73,7 @@ const Header = () => {
         className="cursor-pointer flex items-center md:justify-start text-2xl font-bold w-auto md:w-[20%]"
       >
         {navData.logoUrl ? (
-          <img src={`https:${navData.logoUrl}`} alt="Logo" className="h-40 w-40 " />
+          <LogoImage src={navData.logoUrl} />
         ) : (
           <LoadingSpinner />
         )}

@@ -16,9 +16,9 @@ const HomeIcons = () => {
 
   return (
     <div className="relative">
-      {/* Floating Circle Icons */}
+    
       <div className="fixed bottom-5 right-5 flex flex-col items-end space-y-3 z-50">
-        {/* WhatsApp Icon */}
+     
         <a
           href={`https://wa.me/${data.number}`}
           target="_blank"
@@ -31,7 +31,6 @@ const HomeIcons = () => {
           />
         </a>
 
-        {/* Quote Icon */}
         <button
           onClick={() => setShowQuote(true)}
           title="Get a Quote"
@@ -45,11 +44,11 @@ const HomeIcons = () => {
         </button>
       </div>
 
-      {/* Form Modal */}
+     
       {showQuote && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
           <div className="relative">
-            {/* ❌ Close Button */}
+      
             <button
               onClick={() => setShowQuote(false)}
               className="absolute top-6 right-6  cursor-pointer md:top-14 md:right-14 bg-white text-black  w-10 h-10 flex items-center justify-center shadow-lg hover:bg-red-600 hover:text-white transition"
@@ -58,7 +57,7 @@ const HomeIcons = () => {
               &times;
             </button>
 
-            {/* The Form */}
+          
             <GetQuoteForm />
           </div>
         </div>

@@ -40,13 +40,13 @@ const SlidingProjects = ({ categories }) => {
       {/* Navigation Arrows */}
       <button
         onClick={prevImage}
-        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-lg"
+        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-lg cursor-pointer"
       >
         <FaArrowLeft />
       </button>
       <button
         onClick={nextImage}
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-lg"
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-lg cursor-pointer"
       >
         <FaArrowRight />
       </button>

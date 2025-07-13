@@ -2,9 +2,7 @@
 import React, { useState, useEffect } from "react";
 
 const Banner = ({ data, interval = 5000 }) => {
-  if (!data || !data.items) {
-    return null; 
-  }
+  if (!data) return null;
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {

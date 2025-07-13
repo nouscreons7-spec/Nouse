@@ -37,6 +37,8 @@ const Home = () => {
           secondMessageData: fields.secondmessage?.fields || {},
           secondAnnouncementData: fields.secondAnnouncementData?.fields || {},
           testimonialSection: fields.testimonialSection?.fields || {},
+          ensureSection: fields.ensuresection?.fields || {},
+          AdvertisementSection: fields.advertisement?.fields || {},
         });
       } catch (err) {
         console.error("❌ Error fetching homepage data:", err);
@@ -70,8 +72,8 @@ const Home = () => {
       <FeatureSection data={homeData.featuresData} />
       <Message messageData={homeData.secondMessageData} />
       <TestimonialSection data={homeData.testimonialSection} />
-      <EnsureSection />
-      <Advertisement />
+      <EnsureSection data={homeData.ensureSection}/>
+      <Advertisement data={homeData.AdvertisementSection}/>
       <AnnounceContent announcementData={homeData.secondAnnouncementData} />
       <Footer />
     </div>
