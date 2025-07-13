@@ -22,7 +22,7 @@ const ProjectSection = ({ data }) => {
   const backgroundUrl =
     data?.backgroundImage?.fields?.file?.url
       ? `https:${data.backgroundImage.fields.file.url}`
-      : "/banner/shade3.jpg";
+      : "";
 
   const projects = data.projects || [];
 

@@ -12,7 +12,7 @@ import FeatureSection from "../FeatureSection/page";
 import TestimonialSection from "../TestimonialSection/page";
 import EnsureSection from "../EnsureSection/page";
 import Advertisement from "../advertisement/page";
-
+import QuickLinksFloatingPanel from "../QuickLinksFloatingPanel/page";
 import { getContent } from "@/contentful/page";
 import LoadingSpinner from "../LoadingSpinner/page";
 
@@ -62,7 +62,7 @@ const Home = () => {
     <div>
       <Header />
       <Banner data={homeData.homebanner} />
-
+     <div > <QuickLinksFloatingPanel  /></div>
       <CompletedProjects data={homeData.finishedprojects} />
 
       <ProjectSection data={homeData.projectsSection} />

@@ -7,7 +7,7 @@ import Drawer from "../Drawer/page";
 import { getContent } from "@/contentful/page";
 import LoadingSpinner from "../LoadingSpinner/page";
 import LogoImage from "../logo/page";
-
+import { useNav } from "../context/NavContext";
 const Header = () => {
   const [showDrawer, setShowDrawer] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -17,7 +17,9 @@ const Header = () => {
     logoUrl: "",
   });
   const router = useRouter();
-
+  const { setNavItems } = useNav();
+ 
+ console.log(navData.navItems, "navItems");
   const onClose = () => setShowDrawer(false);
 
   useEffect(() => {
@@ -27,7 +29,11 @@ const Header = () => {
 
         if (entries.length > 0) {
           const fields = entries[0].fields;
-
+          setNavItems(
+            fields.items?.map((item) => ({
+              label: item.fields.label || item.fields.title || "Unnamed",
+            })) || []
+          );
           setNavData({
             text: fields.quoteText || "",
             navItems:
