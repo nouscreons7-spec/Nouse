@@ -19,7 +19,7 @@ const Root = () => {
               </div>
             }
           >
-            <home />
+            <LoginPage />
             <HomeIcons />
             {/* <OurProjects /> */}
           </Suspense>
