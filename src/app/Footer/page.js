@@ -4,10 +4,11 @@ import { FaInstagram, FaPhone, FaEnvelope } from "react-icons/fa";
 import { getContent2 } from "@/contentful/page";
 import { useRouter } from "next/navigation";
 import LogoImage from "../logo/page";
-
+import { useQuickLinks } from "../context/quickLinks";
 const Footer = () => {
   const [footerData, setFooterData] = useState(null);
   const router = useRouter();
+  const { setQuickLinks, } = useQuickLinks();
 
   useEffect(() => {
     async function fetchData() {
@@ -22,6 +23,7 @@ const Footer = () => {
 
         // === BACKGROUND IMAGE ===
         const bgImage = fields.bgImage?.fields?.file?.url || "";
+      
 
         // === QUICK LINKS ===
         const quickLinkData = fields.quickLinks?.fields?.pageLink || [];
@@ -108,6 +110,7 @@ const Footer = () => {
           footerLogos,
           companyInfo,
         });
+        setQuickLinks(quickLinks);
       } catch (err) {
         console.error("Error fetching footer data:", err.message);
       }

@@ -17,7 +17,7 @@ const HomeIcons = () => {
   return (
     <div className="relative">
     
-      <div className="fixed bottom-5 right-5 flex flex-col items-end space-y-3 z-50">
+      <div className="fixed bottom-5 right-3 flex flex-col items-end space-y-3 z-50">
      
         <a
           href={`https://wa.me/${data.number}`}
