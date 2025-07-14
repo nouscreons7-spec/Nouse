@@ -8,6 +8,8 @@ import { getContent } from "@/contentful/page";
 import LoadingSpinner from "../LoadingSpinner/page";
 import LogoImage from "../logo/page";
 import { useNav } from "../context/NavContext";
+import { NavProvider } from "@/app/context/NavContext";
+import { QuickLinksProvider } from "@/app/context/quickLinks";
 const Header = () => {
   const [showDrawer, setShowDrawer] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -65,6 +67,8 @@ const Header = () => {
   };
 
   return (
+    <NavProvider>
+        <QuickLinksProvider>
     <header
       className={`fixed top-0 left-0 w-full h-[17%] z-30 p-4 flex items-center justify-between transition-colors duration-300 ${
         isScrolled
@@ -108,6 +112,8 @@ const Header = () => {
         />
       </div>
     </header>
+    </QuickLinksProvider>
+    </NavProvider>
   );
 };
 

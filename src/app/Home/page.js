@@ -62,7 +62,7 @@ const Home = () => {
     <div>
       <Header />
       <Banner data={homeData.homebanner} />
-     <div > <QuickLinksFloatingPanel  /></div>
+     <QuickLinksFloatingPanel  />
       <CompletedProjects data={homeData.finishedprojects} />
 
       <ProjectSection data={homeData.projectsSection} />

@@ -7,8 +7,10 @@ import { useNav } from "../context/NavContext";
 
 const Drawer = ({ isOpen, onClose }) => {
   const router = useRouter();
-  const { quickLinks } = useQuickLinks();
-  const { navItems } = useNav();
+  const data = useQuickLinks();
+  const quickLinks = data?.quickLinks || [];
+  const navData = useNav();
+  const navItems = navData.navItems || [];
 
   const viewContentPage = (page) => {
     router.push(`/pages/content?keyword=${page}`);

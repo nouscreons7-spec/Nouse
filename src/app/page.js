@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import Home from "./Home/page";
-import OurProjects from "./pages/OurProjects/page";
-import ContactUs from "./pages/ContactUs/page";
+import OurProjects from "./pages/ourprojects/page";
+import ContactUs from "./pages/contactus/page";
 import LoadingSpinner from "./LoadingSpinner/page";
 import LoginPage from "./login/page";
 import HomeIcons from "./HomeIcons/page";
@@ -19,7 +19,7 @@ const Root = () => {
               </div>
             }
           >
-            <LoginPage />
+            <home />
             <HomeIcons />
             {/* <OurProjects /> */}
           </Suspense>

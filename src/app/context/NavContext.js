@@ -1,8 +1,10 @@
 'use client';
 
 import React, { createContext, useContext, useState } from 'react';
-
-const NavContext = createContext();
+const NavContext = createContext({
+  navItems: [],
+  setNavItems: () => {}, // noop function as default
+})
 
 export const NavProvider = ({ children }) => {
   const [navItems, setNavItems] = useState([]);

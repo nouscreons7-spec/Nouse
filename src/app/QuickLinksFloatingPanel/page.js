@@ -4,9 +4,11 @@ import React, { useState } from "react";
 import { useQuickLinks } from "../context/quickLinks";
 import { FaLink } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+
 const QuickLinksFloatingPanel = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { quickLinks } = useQuickLinks();
+  const data = useQuickLinks();
+  const quickLinks = data?.quickLinks || [];
  
   const router = useRouter();
 
