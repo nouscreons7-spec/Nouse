@@ -15,11 +15,10 @@ import Advertisement from "../advertisement/page";
 import QuickLinksFloatingPanel from "../QuickLinksFloatingPanel/page";
 import { getContent } from "@/contentful/page";
 import LoadingSpinner from "../LoadingSpinner/page";
-
 const Home = () => {
   const [homeData, setHomeData] = useState(null);
   const [error, setError] = useState(null);
-
+ 
   useEffect(() => {
     async function fetchData() {
       try {
@@ -56,7 +55,7 @@ const Home = () => {
       </div>
     );
   }
-  console.log("Home Data:", homeData);
+
 
   return (
     <div>
