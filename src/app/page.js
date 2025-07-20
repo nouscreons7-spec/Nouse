@@ -6,10 +6,10 @@ import LoadingSpinner from "./LoadingSpinner/page";
 import LoginPage from "./login/page";
 import HomeIcons from "./HomeIcons/page";
 import { QuickLinksProvider } from "./context/quickLinks";
-import {NavProvider} from "./context/NavContext";
+
 const Root = () => {
   return (
-    <div> <NavProvider>
+    <div> 
       <QuickLinksProvider>
        
           <Suspense
@@ -21,10 +21,10 @@ const Root = () => {
           >
             <LoginPage />
             <HomeIcons />
-            {/* <OurProjects /> */}
+            {/* <ContactUs /> */}
           </Suspense>
       
-      </QuickLinksProvider>  </NavProvider>
+      </QuickLinksProvider>  
     </div>
    
     //  <ContactUs />

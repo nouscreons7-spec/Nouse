@@ -9,21 +9,21 @@ const QuickLinksFloatingPanel = () => {
   const [isOpen, setIsOpen] = useState(false);
   const data = useQuickLinks();
   const quickLinks = data?.quickLinks || [];
- 
+
   const router = useRouter();
 
   return (
     <div
-      className="hidden md:flex fixed right-3 top-1/3 -translate-y-1/2 z-50"
+      className="hidden md:flex fixed right-3 top-1/3 -translate-y-1/2 z-20"
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
       <div
         className="bg-gradient-to-b from-grey-600 to-blue-500 text-white
-             w-8 h-32 shadow-md cursor-pointer flex flex-col items-center justify-center
-             border-l-2 border-r-2 border-yellow-300
-             hover:shadow-xl transition-all duration-300 ease-in-out
-             hover:scale-105 space-y-2 rounded-none"
+       w-8 h-32 shadow-md cursor-pointer flex flex-col items-center justify-center
+       border-l-2 border-r-2 border-yellow-300
+       hover:shadow-xl transition-all duration-300 ease-in-out
+       hover:scale-105 space-y-2 rounded-l-full"
       >
         <FaLink className="text-xl animate-bounce" />
         <span className="text-[10px] leading-tight">Quick</span>

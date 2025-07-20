@@ -7,8 +7,8 @@ import Drawer from "../Drawer/page";
 import { getContent } from "@/contentful/page";
 import LoadingSpinner from "../LoadingSpinner/page";
 import LogoImage from "../logo/page";
-import { useNav } from "../context/NavContext";
-import { NavProvider } from "@/app/context/NavContext";
+import { useQuickLinks } from "../context/quickLinks";
+
 import { QuickLinksProvider } from "@/app/context/quickLinks";
 const Header = () => {
   const [showDrawer, setShowDrawer] = useState(false);
@@ -19,9 +19,11 @@ const Header = () => {
     logoUrl: "",
   });
   const router = useRouter();
-  const { setNavItems } = useNav();
+
  
- console.log(navData.navItems, "navItems");
+  const data = useQuickLinks();
+   const quickLinks = data?.quickLinks || [];
+  
   const onClose = () => setShowDrawer(false);
 
   useEffect(() => {
@@ -31,11 +33,7 @@ const Header = () => {
 
         if (entries.length > 0) {
           const fields = entries[0].fields;
-          setNavItems(
-            fields.items?.map((item) => ({
-              label: item.fields.label || item.fields.title || "Unnamed",
-            })) || []
-          );
+          
           setNavData({
             text: fields.quoteText || "",
             navItems:
@@ -67,7 +65,7 @@ const Header = () => {
   };
 
   return (
-    <NavProvider>
+  
         <QuickLinksProvider>
     <header
       className={`fixed top-0 left-0 w-full h-[17%] z-30 p-4 flex items-center justify-between transition-colors duration-300 ${
@@ -76,7 +74,7 @@ const Header = () => {
           : "bg-gradient-to-b from-black/80 to-transparent text-white"
       }`}
     >
-      <Drawer isOpen={showDrawer} onClose={onClose} />
+      <Drawer isOpen={showDrawer} onClose={onClose} navData={navData.navItems} quickLinks={quickLinks}/>
 
       <div
         onClick={() => router.push("/")}
@@ -113,7 +111,7 @@ const Header = () => {
       </div>
     </header>
     </QuickLinksProvider>
-    </NavProvider>
+
   );
 };
 
