@@ -5,7 +5,7 @@ const LogoImage = ({ src, alt = 'Creo Homes', className = '' }) => {
     <img
       src={src}
       alt={alt}
-      className={`h-44 w-44 object-contain ${className}`}
+      className={`h-44 w-44 object-contain ${className} `}
     />
   );
 };

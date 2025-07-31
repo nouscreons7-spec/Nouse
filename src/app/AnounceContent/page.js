@@ -4,6 +4,8 @@ const AnnounceContent = ({ announcementData }) => {
   if (!announcementData) return null;
   const backgroundImageUrl = announcementData?.
   bgimage?.fields?.file?.url;
+  
+  
   return (
     <div
       className="relative flex items-center justify-center min-h-[400px] bg-cover bg-center px-6 text-center"
