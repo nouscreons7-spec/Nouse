@@ -2,8 +2,8 @@
 
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
-const WhyNous = ({ data }) => {
-  const backgroundImageUrl = data?.fields?.backgroundImage?.fields?.file?.url
+const Why = ({ data }) => {
+  const backgroundImageUrl = data?.backgroundImage?.fields?.file?.url
     ? `https:${data.backgroundImage.fields.file.url}`
     : "";
 
@@ -30,4 +30,4 @@ const WhyNous = ({ data }) => {
   );
 };
 
-export default WhyNous;
+export default Why;

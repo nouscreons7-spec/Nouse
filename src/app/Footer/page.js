@@ -128,7 +128,8 @@ const Footer = () => {
         backgroundImage: `url(${footerData.bgImage})`,
       }}
     >
-      <div className="container ">
+      <div className="w-full">
+
         <div className="flex flex-col lg:flex-row ">
           <div className="w-full lg:w-[25%] flex flex-col items-center ">
             <LogoImage src={footerData.logo} />
@@ -158,7 +159,7 @@ const Footer = () => {
                         key={index}
                         className="w-full mb-6 text-center sm:hover:underline cursor-pointer mt-4 text-center"
                       >
-                        <a href={item.url}>{item.platform}</a>
+                        <a href={`/${item.url}`}>{item.platform}</a>
                       </li>
                     ))}
                   </ul>
