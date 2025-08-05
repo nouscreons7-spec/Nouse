@@ -15,6 +15,7 @@ import Advertisement from "../advertisement/page";
 import QuickLinksFloatingPanel from "../QuickLinksFloatingPanel/page";
 import { getContent } from "@/contentful/page";
 import LoadingSpinner from "../LoadingSpinner/page";
+import HomeIcons from "../HomeIcons/page";
 const Home = () => {
   const [homeData, setHomeData] = useState(null);
   const [error, setError] = useState(null);
@@ -62,6 +63,7 @@ const Home = () => {
       <Header />
       <Banner data={homeData.homebanner} />
      <QuickLinksFloatingPanel  />
+           <HomeIcons /> 
       <CompletedProjects data={homeData.finishedprojects} />
 
       <ProjectSection data={homeData.projectsSection} />
