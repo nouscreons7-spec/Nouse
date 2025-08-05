@@ -52,14 +52,14 @@ const Drawer = ({ isOpen, onClose, navData, quickLinks }) => {
 
         {/* Quick Links */}
         <div>
-          <h2 className="text-2xl font-semibold uppercase mb-4">Quick Links</h2>
+         
           <div className="grid grid-cols-2 gap-6 text-sm text-gray-400">
           {Array.isArray(quickLinks) && quickLinks.length > 0 ? (
   quickLinks.map((section, idx) => (
     <div key={idx}>
-      <h3 className="font-semibold text-white mb-2">
+        <h2 className="text-2xl font-semibold uppercase mb-4 text-white">
         {section.section || "Untitled Section"}
-      </h3>
+      </h2>
       {Array.isArray(section.links) && section.links.length > 0 ? (
         section.links.map((link, index) => (
           <div

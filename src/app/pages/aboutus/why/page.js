@@ -11,7 +11,7 @@ const Why = ({ data }) => {
   const subTitle = data?.subTitle || "";
   const description = data?.description || null;
 
-  console.log(data, "Announcement Data");
+
   return (
     <div
       className="relative  flex flex-col justify-center items-center min-h-[500px] bg-cover bg-center text-center"

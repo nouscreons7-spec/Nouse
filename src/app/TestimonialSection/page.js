@@ -10,7 +10,7 @@ const TestimonialSection = ({ data }) => {
   const items = data?.items || [];
   const bgUrl = data?.bgImage?.fields?.file?.url
     ? `https:${data.bgImage.fields.file.url}`
-    : "/img/grat.jpeg";
+    : "g";
 
   const handlePrev = () => {
     setStartIndex((prev) => (prev - 1 + items.length) % items.length);
@@ -24,7 +24,7 @@ const TestimonialSection = ({ data }) => {
     items[startIndex],
     items[(startIndex + 1) % items.length],
   ];
-
+console.log(data,bgUrl); 
   return (
     <div
       className="w-full py-20 px-4 bg-cover bg-center"
@@ -41,8 +41,8 @@ const TestimonialSection = ({ data }) => {
             const name = item?.fields?.name || `Client ${idx + 1}`;
             const review = item?.fields?.review || "";
             const image =
-              item?.fields?.image?.fields?.file?.url
-                ? `https:${item.fields.image.fields.file.url}`
+              item?.fields?.bgimage?.fields?.file?.url
+                ? `https:${item.fields.bgimage.fields.file.url}`
                 : "";
             const famImg =
               item?.fields?.famImg?.fields?.file?.url

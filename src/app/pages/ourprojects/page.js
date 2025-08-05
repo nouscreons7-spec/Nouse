@@ -7,7 +7,8 @@ import LoadingSpinner from "@/app/LoadingSpinner/page";
 import HomeIcons from "@/app/HomeIcons/page";
 
 import { getContent2 } from "@/contentful/page";
-
+import QuickLinksFloatingPanel from "@/app/QuickLinksFloatingPanel/page";
+import { QuickLinksProvider } from "@/app/context/quickLinks";
 const OurProjects = () => {
   const [projectData, setProjectData] = useState(null);
   const [error, setError] = useState(null);
@@ -48,7 +49,9 @@ const OurProjects = () => {
 
   return (
     <div>
+        <QuickLinksProvider>
       <Header />
+           <QuickLinksFloatingPanel  />
       <HomeIcons />
       <BanenerComponent
         data={{
@@ -87,6 +90,7 @@ const OurProjects = () => {
       </div>
 
       <Footer />
+      </QuickLinksProvider>
     </div>
   );
 };

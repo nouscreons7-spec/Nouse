@@ -3,7 +3,7 @@
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 const WhyNous = ({ data }) => {
-  const backgroundImageUrl = data?.fields?.backgroundImage?.fields?.file?.url
+  const backgroundImageUrl = data?.backgroundImage?.fields?.file?.url
     ? `https:${data.backgroundImage.fields.file.url}`
     : "";
 
@@ -11,7 +11,6 @@ const WhyNous = ({ data }) => {
   const subTitle = data?.subTitle || "";
   const description = data?.description || null;
 
-  console.log(data, "Announcement Data");
   return (
     <div
       className="relative  flex flex-col justify-center items-center min-h-[500px] bg-cover bg-center text-center"
@@ -19,7 +18,7 @@ const WhyNous = ({ data }) => {
     >
       <div className="relative z-10 max-w-2xl px-4  bg-opacity-40 py-12 rounded-md">
         <h3 className="text-gray-300 mb-6 text-3xl">{title}</h3>
-        <h1 className="text-white text-4xl md:text-5xl font-bold mb-6">
+        <h1 className="text-gray-300 text-4xl md:text-5xl font-bold mb-6">
           {subTitle}
         </h1>
         <div className="text-gray-300 text-base md:text-lg leading-relaxed">
