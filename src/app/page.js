@@ -24,7 +24,7 @@ const Root = () => {
               </div>
             }
           >
-            <Careers />
+            <Home />
             {/* <LoginPage />
             <HomeIcons /> */}
             {/* <ContactUs /> */}

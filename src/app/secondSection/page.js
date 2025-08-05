@@ -26,7 +26,7 @@ const SlidingProjects = ({ categories }) => {
   };
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto">
+    <div className="relative w-full px-20 mx-auto">
       {/* Main Image Display */}
       <div
         className="relative w-full h-[550px] bg-cover bg-center rounded-lg overflow-hidden"

@@ -1,7 +1,7 @@
 import { FaMapMarkerAlt, FaGraduationCap, FaCalendarAlt } from "react-icons/fa";
 
 const JobList = ({ bgImage, jobList }) => {
-  console.log(jobList.notes,"dysadyasyda");
+if (!jobList) return null
   
   return (
     <div

@@ -10,6 +10,7 @@ import { QuickLinksProvider } from "@/app/context/quickLinks";
 import { getContent2 } from "@/contentful/page";
 import LoadingSpinner from "@/app/LoadingSpinner/page";
 import HomeIcons from "@/app/HomeIcons/page";
+import QuickLinksFloatingPanel from "@/app/QuickLinksFloatingPanel/page";
 
 const ContactUs = () => {
   const [contactData, setContactData] = useState(null);
@@ -30,10 +31,11 @@ const ContactUs = () => {
           officeAddress: fields.officeAddress || "",
           factoryAddress: fields.factoryAddress || "",
           headings: fields.headings || {},
-          image: fields.image?.fields?.file?.url || "",
-          bgimage: fields.bgimage?.fields?.file?.url || "",
+          image: fields.bannerImage?.fields?.file?.url || "",
+          bgimage: fields.bgImage?.fields?.file?.url || "",
         };
-
+       console.log(formattedData);
+       
         setContactData(formattedData);
       } catch (err) {
         console.error("❌ Error fetching contact page data:", err);
@@ -47,10 +49,12 @@ const ContactUs = () => {
   if (error) return <div>Error loading content: {error}</div>;
   if (!contactData) return <LoadingSpinner />;
 
+
   return (
     <div>
       <QuickLinksProvider>
         <Header />
+             <QuickLinksFloatingPanel  />
         <HomeIcons />
         <BanenerComponent
           data={{

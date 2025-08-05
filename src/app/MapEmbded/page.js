@@ -1,4 +1,5 @@
 const MapEmbed = ({image}) => {
+  
     return (
       <div className="h-[500px] md:h-[600px] flex justify-center items-center w-full  p-5 rounded-xl overflow-hidden shadow-lg">
         <iframe

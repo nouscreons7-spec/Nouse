@@ -1,6 +1,8 @@
 "use client";
 
 const CoreTeam = ({ bgImage, title, subtitle, teamMembers }) => {
+
+  
   return (
     <div
       className="bg-cover bg-center py-10 px-6"
@@ -20,8 +22,8 @@ const CoreTeam = ({ bgImage, title, subtitle, teamMembers }) => {
       <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-7xl mx-auto">
         {teamMembers?.map((member, idx) => {
           const memberFields = member?.fields || {};
-          const imageUrl = memberFields?.image?.fields?.file?.url
-            ? `https:${memberFields.image.fields.file.url}`
+          const imageUrl = memberFields?.imageUrl?.fields?.file?.url
+            ? `https:${memberFields.imageUrl.fields.file.url}`
             : "";
 
           return (
