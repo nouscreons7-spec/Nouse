@@ -21,7 +21,7 @@ const Root = () => {
             }
           >
            
-             <Home />
+             <LoginPage />
             
           </Suspense>
       
