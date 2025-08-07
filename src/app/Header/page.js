@@ -53,7 +53,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
+      setIsScrolled(window.scrollY > 30);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -68,7 +68,7 @@ const Header = () => {
   
         <QuickLinksProvider>
     <header
-      className={`fixed top-0 left-0 w-full h-[17%] z-30 p-4 flex items-center justify-between transition-colors duration-300 ${
+      className={`fixed top-0 left-0 w-full h-[15%] z-30 p-4 flex items-center justify-between transition-colors duration-300 ${
         isScrolled
           ? "bg-white/10 backdrop-blur-sm text-yellow-500 shadow-md"
           : "bg-gradient-to-b from-black/80 to-transparent text-white"
