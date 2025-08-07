@@ -61,6 +61,7 @@ const Footer = () => {
           name: company.name || "",
           privacyLink: company.privacyLink || "",
           madeBy: company.madeBy || "",
+          label:company.label || "",
         };
 
         const structuredFooter = {
@@ -84,6 +85,7 @@ const Footer = () => {
   }, []);
 
   if (!footerData) return null;
+console.log(footerData.companyInfo,"dasd");
 
   return (
     <div
@@ -130,6 +132,10 @@ const Footer = () => {
           {/* === Address === */}
           <div className="w-full lg:w-[25%] text-center mb-6">
             <h3 className="uppercase font-semibold mb-4 text-sm">Our Address</h3>
+      
+      <div className="flex flex-row lg:flex-col justify-evenly">
+
+
             {footerData.address.map((location, i) => (
               <div key={i} className="mb-4">
                 <p className="font-bold text-md">{location.label}</p>
@@ -139,7 +145,7 @@ const Footer = () => {
                   </p>
                 ))}
               </div>
-            ))}
+            ))}</div>
           </div>
 
           {/* === Contact Info === */}
@@ -164,13 +170,13 @@ const Footer = () => {
         {/* === Bottom Bar === */}
         <div className="flex flex-col md:flex-row items-center justify-between mt-8 text-xs text-center border-t pt-4 border-gray-300">
           <p>
-            ©{footerData.companyInfo.year} {footerData.companyInfo.name}. All Rights Reserved
+          {footerData.companyInfo.year} {footerData.companyInfo.name}
+          </p>
+          <p >
+            <a href={footerData.companyInfo.privacyLink}>{footerData.companyInfo.label}</a>
           </p>
           <p>
-            <a href={footerData.companyInfo.privacyLink}>Privacy policy</a>
-          </p>
-          <p>
-            Made by{" "}
+           
             <span className="font-semibold">
               {footerData.companyInfo.madeBy}
             </span>

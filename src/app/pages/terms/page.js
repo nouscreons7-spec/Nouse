@@ -45,7 +45,7 @@ const Terms = () => {
     <QuickLinksProvider>
     <div className="flex flex-col">
       <Header />
-      <div className="bg-black text-white min-h-screen px-6 pt-40">
+      <div className="bg-black text-white  px-6 pt-60   md:pt-40">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-bold mb-6 border-b border-gray-700 pb-2">
             {termsData.title}

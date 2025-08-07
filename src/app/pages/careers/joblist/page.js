@@ -5,7 +5,7 @@ if (!jobList) return null
   
   return (
     <div
-      className="bg-cover bg-center min-h-screen py-12 px-4 md:px-12"
+      className="bg-cover bg-center  py-12 px-4 md:px-12"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
       <div className="max-w-5xl mx-auto bg-white bg-opacity-70 rounded-lg p-6 space-y-10">

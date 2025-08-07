@@ -23,7 +23,7 @@ const Banner = ({ data, interval = 5000 }) => {
     : "";
 
  return (
- <div className="relative w-full h-[50vh]  lg:h-[75vh] overflow-hidden">
+ <div className="relative w-full h-[50vh]  lg:h-screen overflow-hidden">
     <div className="absolute inset-0 transition-all duration-[5000ms] scale-100 animate-zoom">
       <img
         src={imageUrl}

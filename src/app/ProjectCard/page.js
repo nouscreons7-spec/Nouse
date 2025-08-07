@@ -93,7 +93,7 @@ const ProjectCard = () => {
                   {projectData.buttonText && (
                     <button
                       onClick={() => openViewer(project)}
-                      className="mt-4 flex justify-center w-1/2 md:w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition"
+                      className="cursor-pointer mt-4 flex justify-center w-1/2 md:w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition"
                     >
                       {projectData.buttonText}
                     </button>
