@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+
 
 const HomeIcons = () => {
-  const [showQuote, setShowQuote] = useState(false);
+ 
 
   const data = {
     number: 7308649064,

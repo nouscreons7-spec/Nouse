@@ -9,17 +9,18 @@ const Message = ({ messageData }) => {
   const textDocument = messageData?.text;
 
   return (
-    <div
-      className="relative flex min-h-screen bg-cover bg-center bg-transparent"
-      style={{ backgroundImage: `url(${backgroundImageUrl})` }}
-    >
-      <div className="relative max-w-2xl px-10">
-        <div className="text-white text-3xl font-bold py-20">
-          {documentToReactComponents(textDocument)}
-        </div>
+  <div
+    className="relative w-full h-[40vh] lg:h-[50vh] bg-cover bg-center flex items-center justify-start"
+    style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+  >
+    <div className="max-w-2xl px-6 sm:px-10">
+      <div className="text-white text-2xl sm:text-3xl font-bold leading-snug">
+        {documentToReactComponents(textDocument)}
       </div>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default Message;

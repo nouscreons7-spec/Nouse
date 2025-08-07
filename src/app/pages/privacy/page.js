@@ -4,6 +4,7 @@ import Footer from "@/app/Footer/page";
 import Header from "@/app/Header/page";
 import LoadingSpinner from "@/app/LoadingSpinner/page";
 import { getContent2 } from "@/contentful/page";
+import { QuickLinksProvider } from "@/app/context/quickLinks";
 
 const Privacy = () => {
   const [termsData, setTermsData] = useState(null);
@@ -41,9 +42,10 @@ const Privacy = () => {
   if (!termsData) return <LoadingSpinner />;
 
   return (
+      <QuickLinksProvider>
     <div className="flex flex-col">
       <Header />
-      <div className="bg-black text-white min-h-screen px-6 pt-40">
+       <div className="bg-black text-white  px-6 pt-60   md:pt-40">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-bold mb-6 border-b border-gray-700 pb-2">
             {termsData.title}
@@ -67,7 +69,7 @@ const Privacy = () => {
         </div>
       </div>
       <Footer />
-    </div>
+    </div></QuickLinksProvider>
   );
 };
 

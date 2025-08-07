@@ -14,6 +14,9 @@ import ArchitectureShowcase from "./ArchitectureShowcase/page";
 import FeatureGrid from "./FeatureGrid/page";
 import AnnounceContent from "@/app/AnounceContent/page";
 import LoadingSpinner from "@/app/LoadingSpinner/page";
+import QuickLinksFloatingPanel from "@/app/QuickLinksFloatingPanel/page";
+import { QuickLinksProvider } from "@/app/context/quickLinks";
+import HomeIcons from "@/app/HomeIcons/page";
 
 const ContentPage = () => {
   const [data, setData] = useState(null);
@@ -66,9 +69,11 @@ const ContentPage = () => {
   } = data;
 
   return (
-    <>
+  
+    <QuickLinksProvider>
       <Header />
-
+<QuickLinksFloatingPanel  />
+<HomeIcons /> 
       {sliderData && (
         <ImageSlider
           images={sliderData.images}
@@ -92,7 +97,7 @@ const ContentPage = () => {
       )}
 
       <Footer />
-    </>
+    </QuickLinksProvider>
   );
 };
 

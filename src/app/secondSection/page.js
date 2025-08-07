@@ -22,18 +22,22 @@ const SlidingProjects = ({ categories }) => {
   };
 
   const prevImage = () => {
-    setSelectedIndex((prev) => (prev - 1 + categories.length) % categories.length);
+    setSelectedIndex(
+      (prev) => (prev - 1 + categories.length) % categories.length
+    );
   };
 
   return (
-    <div className="relative w-full px-20 mx-auto">
+    <div className="relative w-full p-2 mx-auto md:px-10">
       {/* Main Image Display */}
       <div
         className="relative w-full h-[550px] bg-cover bg-center rounded-lg overflow-hidden"
         style={{ backgroundImage: `url(${imageUrl})` }}
       >
-        <div className="absolute inset-0  bg-opacity-30 flex items-start justify-start pt-10 pl-10 w-[67%]">
-          <h2 className="text-white text-4xl font-bold">{title}</h2>
+        <div className="absolute inset-0  bg-opacity-30 flex items-start justify-center pt-10 ">
+          <h2 className="text-white text-2xl font-bold max-w-[60%] md:text-4xl md:max-w-[40%]">
+            {title}
+          </h2>
         </div>
       </div>
 
@@ -52,23 +56,21 @@ const SlidingProjects = ({ categories }) => {
       </button>
 
       {/* Category Buttons */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-[60%] max-w-4xl p-4 bg-opacity-30 rounded-lg grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 w-[80%]">
-  {categories.map((cat, index) => (
-    <button
-      key={cat.fields?.key || index}
-      onClick={() => setSelectedIndex(index)}
-      className={`cursor-pointer px-4 py-2 rounded-lg text-white text-xs w-full h-10 ${
-        selectedIndex === index
-          ? "bg-gray-900"
-          : "bg-gray-800 hover:bg-gray-700"
-      }`}
-    >
-      {(cat.fields?.key || `Category ${index + 1}`).toUpperCase()}
-    </button>
-  ))}
-</div>
-
-
+      <div className="absolute bottom-1/2 left-1/2 transform -translate-x-1/2 max-w-2xl  bg-opacity-30 rounded-lg grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 w-[80%] bottom-8">
+        {categories.map((cat, index) => (
+          <button
+            key={cat.fields?.key || index}
+            onClick={() => setSelectedIndex(index)}
+            className={`cursor-pointer px-4 py-2 rounded-lg text-white text-xs w-full h-10 ${
+              selectedIndex === index
+                ? "bg-gray-900"
+                : "bg-gray-800 hover:bg-gray-700"
+            }`}
+          >
+            {(cat.fields?.key || `Category ${index + 1}`).toUpperCase()}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

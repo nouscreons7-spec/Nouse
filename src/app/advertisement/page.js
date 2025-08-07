@@ -59,7 +59,7 @@ const Advertisement = ({ data }) => {
           </button>
 
           {/* Buttons */}
-          <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex flex-wrap gap-2 justify-center">
+          <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex flex-wrap gap-4 justify-center">
             {data.items.map((item, index) => (
               <button
                 key={index}
