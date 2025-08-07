@@ -4,7 +4,6 @@ import { RxCross2 } from "react-icons/rx";
 import { useRouter } from "next/navigation";
 
 const Drawer = ({ isOpen, onClose, navData, quickLinks }) => {
-
   const router = useRouter();
 
   const viewContentPage = (page) => {
@@ -30,7 +29,7 @@ const Drawer = ({ isOpen, onClose, navData, quickLinks }) => {
       <div className="mt-6 space-y-10">
         {/* Navigation Links */}
         <div>
-          <h2 className="text-lg font-semibold uppercase mb-4">Navigation</h2>
+          <h2 className="text-md font-semibold uppercase mb-4">Navigation</h2>
           <div className="grid grid-cols-2 gap-4 text-lg text-gray-400">
             {navData && Array.isArray(navData) ? (
               navData.map((item, index) => (
@@ -52,36 +51,38 @@ const Drawer = ({ isOpen, onClose, navData, quickLinks }) => {
 
         {/* Quick Links */}
         <div>
-         
-          <div className="grid grid-cols-2 gap-6 text-sm text-gray-400">
-          {Array.isArray(quickLinks) && quickLinks.length > 0 ? (
-  quickLinks.map((section, idx) => (
-    <div key={idx}>
-        <h2 className="text-lg font-semibold uppercase mb-4 text-white">
-        {section.section || "Untitled Section"}
-      </h2>
-      {Array.isArray(section.links) && section.links.length > 0 ? (
-        section.links.map((link, index) => (
-          <div
-            key={index}
-            onClick={() => {
-              if (link?.url) router.push(link.url);
-              onClose?.();
-            }}
-            className="cursor-pointer hover:text-white p-1 transition"
-          >
-            {link?.platform || "Unnamed Link"}
-          </div>
-        ))
-      ) : (
-        <div className="text-gray-400 italic text-sm">No links available</div>
-      )}
-    </div>
-  ))
-) : (
-  <div className="text-gray-400 italic">No quick links to display</div>
-)}
-
+          <div className=" gap-6 text-sm text-gray-400 ">
+            {Array.isArray(quickLinks) && quickLinks.length > 0 ? (
+              quickLinks.map((section, idx) => (
+                <div key={idx} >
+                  <h2 className="text-md font-semibold uppercase mb-4 text-white ">
+                    {section.section || "Untitled Section"}
+                  </h2>
+                  {Array.isArray(section.links) && section.links.length > 0 ? (
+                    section.links.map((link, index) => (
+                      <div
+                        key={index}
+                        onClick={() => {
+                          if (link?.url) router.push(link.url);
+                          onClose?.();
+                        }}
+                        className="cursor-pointer hover:text-white p-1 transition"
+                      >
+                        {link?.platform || "Unnamed Link"}
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-gray-400 italic text-sm">
+                      No links available
+                    </div>
+                  )}
+                </div>
+              ))
+            ) : (
+              <div className="text-gray-400 italic">
+                No quick links to display
+              </div>
+            )}
           </div>
         </div>
       </div>
