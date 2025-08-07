@@ -29,8 +29,8 @@ const Slider = ({ images,title,description}) => {
       />
     )}
 
-    <div className="absolute bottom-4 left-3">
-      <div className="p-8 bg-opacity-50 text-white max-w-[80%]">
+    <div className="absolute bottom-2 left-3">
+      <div className="p-8 bg-opacity-50 text-white max-w-[100%] md:max-w-[80%]">
         <h2 className="text-3xl md:text-6xl font-bold">{title}</h2>
         <div className="mt-2 text-base md:text-xl">
           {documentToReactComponents(description)}
