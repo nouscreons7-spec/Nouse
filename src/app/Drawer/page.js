@@ -30,7 +30,7 @@ const Drawer = ({ isOpen, onClose, navData, quickLinks }) => {
       <div className="mt-6 space-y-10">
         {/* Navigation Links */}
         <div>
-          <h2 className="text-2xl font-semibold uppercase mb-4">Navigation</h2>
+          <h2 className="text-lg font-semibold uppercase mb-4">Navigation</h2>
           <div className="grid grid-cols-2 gap-4 text-lg text-gray-400">
             {navData && Array.isArray(navData) ? (
               navData.map((item, index) => (
@@ -57,7 +57,7 @@ const Drawer = ({ isOpen, onClose, navData, quickLinks }) => {
           {Array.isArray(quickLinks) && quickLinks.length > 0 ? (
   quickLinks.map((section, idx) => (
     <div key={idx}>
-        <h2 className="text-2xl font-semibold uppercase mb-4 text-white">
+        <h2 className="text-lg font-semibold uppercase mb-4 text-white">
         {section.section || "Untitled Section"}
       </h2>
       {Array.isArray(section.links) && section.links.length > 0 ? (
