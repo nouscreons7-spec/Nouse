@@ -5,25 +5,41 @@ import Footer from "@/app/Footer/page";
 import BanenerComponent from "@/app/BannerComponent/page";
 import LoadingSpinner from "@/app/LoadingSpinner/page";
 import HomeIcons from "@/app/HomeIcons/page";
-
-import { getContent2 } from "@/contentful/page";
 import QuickLinksFloatingPanel from "@/app/QuickLinksFloatingPanel/page";
+import { getContent2 } from "@/contentful/page";
 import { QuickLinksProvider } from "@/app/context/quickLinks";
+import ProjectView from "@/app/ProjectView/page"; // Make sure this exists
+import ProjectCard from "@/app/ProjectCard/page";
+
 const OurProjects = () => {
   const [projectData, setProjectData] = useState(null);
   const [error, setError] = useState(null);
+  const [showViewer, setShowViewer] = useState(false);
+  const [galleryData, setGalleryData] = useState({ images: [], info: {} });
 
   useEffect(() => {
     async function fetchData() {
       try {
         const entries = await getContent2("ourprojectspage");
         const fields = entries[0]?.fields;
+const resolvedProjects = (fields.projects || []).map((project, idx) => {
+  const galleryItem = project.fields?.projectsGallery?.[0]?.fields || {};
+  const galleryImages = galleryItem.images?.map((img) => img.fields?.file?.url) || [];
 
-        const resolvedProjects = (fields.projects || []).map((project) => ({
-          id: project.sys?.id || "",
-          projectname: project.fields?.projectname || "",
-          image: project.fields?.image?.fields?.file?.url || "",
-        }));
+  return {
+    id: project.sys?.id || "",
+    projectname: project.fields?.projectname || "",
+    image: project.fields?.image?.fields?.file?.url || "",
+    projectsGallery: galleryImages,
+    info: {
+      title: galleryItem.title || "",
+      location: galleryItem.location || "",
+      floorArea: galleryItem.floorArea || "",
+      plotArea: galleryItem.plotArea || "",
+    },
+  };
+});
+
 
         const formattedData = {
           title: fields.title || "",
@@ -44,52 +60,35 @@ const OurProjects = () => {
     fetchData();
   }, []);
 
+  const openViewer = (project) => {
+    setGalleryData({
+      images: project.projectsGallery,
+      info: project.info,
+    });
+    setShowViewer(true);
+  };
+
   if (error) return <div>Error loading content: {error}</div>;
   if (!projectData) return <LoadingSpinner />;
 
   return (
     <div>
-        <QuickLinksProvider>
-      <Header />
-           <QuickLinksFloatingPanel  />
-      <HomeIcons />
-      <BanenerComponent
-        data={{
-          title: projectData.title,
-          subtitle: projectData.subtitle,
-          image: projectData.image,
-        }}
-      />
+      <QuickLinksProvider>
+        <Header />
+        <QuickLinksFloatingPanel />
+        <HomeIcons />
+        <BanenerComponent
+          data={{
+            title: projectData.title,
+            subtitle: projectData.subtitle,
+            image: projectData.image,
+          }}
+        />
 
-      <div
-        className="w-full bg-gray-100 py-12 px-6"
-        style={{ backgroundImage: `url(${projectData.bgimage})` }}
-      >
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-          {projectData.projects.map((project, idx) => (
-            <div
-              key={project.id || idx}
-              className="bg-white p-4 rounded-xl shadow-lg hover:shadow-2xl transition duration-300"
-            >
-              <img
-                src={project.image || "/placeholder.jpg"}
-                alt={project.projectname}
-                className="w-full h-[248px] min-h-[248px] max-h-[248px] object-cover rounded-lg"
-              />
-              <h3 className="text-lg font-semibold text-gray-800 mt-4 min-h-[48px] max-h-[48px] overflow-hidden">
-                {project.projectname}
-              </h3>
-              {projectData.buttonText && (
-                <button className="mt-4 w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition">
-                  {projectData.buttonText}
-                </button>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
+        <ProjectCard />
 
-      <Footer />
+
+        <Footer />
       </QuickLinksProvider>
     </div>
   );

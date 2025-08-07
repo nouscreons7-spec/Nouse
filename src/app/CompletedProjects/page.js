@@ -2,7 +2,6 @@
 
 import SlidingProjects from "../secondSection/page";
 
-
 const CompletedProjects = ({ data }) => {
   if (!data) return null;
 
@@ -16,14 +15,14 @@ const CompletedProjects = ({ data }) => {
       style={{ backgroundImage: `url(${backgroundUrl})` }}
     >
       <div className="text-center w-[90%] md:w-[50%]">
-        <h2 className="text-gray-500 text-4xl font-semibold uppercase">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold uppercase">
           {data.title}
         </h2>
-        <h1 className="text-4xl md:text-6xl font-bold text-black mt-4 leading-tight">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mt-4 leading-tight">
           {data.subtitle}
         </h1>
-        <p className="text-lg text-gray-700 mt-6 mb-20">
-         { data.description}
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl mt-4 mb-12 px-2 sm:px-6">
+          {data.description}
         </p>
       </div>
 
