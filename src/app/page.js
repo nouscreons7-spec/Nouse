@@ -49,7 +49,7 @@ const Root = () => {
             }
           >
             {/* If Home should be your landing, render Home here instead of LoginPage */}
-            <Home />
+            <LoginPage />
           </Suspense>
         </QuickLinksProvider>
       </SiteSettingsProvider>
