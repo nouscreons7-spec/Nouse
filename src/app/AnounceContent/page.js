@@ -5,6 +5,10 @@ const AnnounceContent = ({ announcementData }) => {
   const backgroundImageUrl = announcementData?.bgimage?.fields?.file?.url;
 
   const { settings } = useSiteSettings() || {};
+  const formatNumber = (num) => {
+    if (!num) return "";
+    return num.replace(/\D/g, "");
+  };
   return (
     <div
       className="relative flex items-center justify-center min-h-[300px] bg-cover bg-center px-4 sm:px-6 md:px-10 text-center min-h-[400px]"
@@ -22,12 +26,17 @@ const AnnounceContent = ({ announcementData }) => {
         </h2>
 
         <a
-          href={announcementData.buttonLink}
+          href={`https://wa.me/${formatNumber(settings?.number)}`}
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-block mt-6 sm:mt-8 md:mt-10"
         >
           <button
-            className="px-6 py-3 text-sm sm:text-base bg-black font-semibold rounded-lg hover:bg-gray-800 transition"
-            style={{ background: settings?.buttonColor, color: settings?.fontColor, }}
+            className="cursor-pointer px-6 py-3 text-sm sm:text-base bg-black font-semibold rounded-lg hover:bg-gray-800 transition"
+            style={{
+              background: settings?.buttonColor,
+              color: settings?.fontColor,
+            }}
           >
             {announcementData.buttonText}
           </button>

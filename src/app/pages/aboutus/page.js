@@ -1,111 +1,44 @@
-"use client";
 
-import { useEffect, useState } from "react";
-import BanenerComponent from "@/app/BannerComponent/page";
-import Footer from "@/app/Footer/page";
-import Header from "@/app/Header/page";
-import { getContent2 } from "@/contentful/page";
-import { QuickLinksProvider } from "@/app/context/quickLinks";
+import AboutUs from "./aboutComponent/page";
 
-import CoreTeam from "./coreteam/page";
-import FeatureSection from "@/app/FeatureSection/page";
-import AnnounceContent from "@/app/AnounceContent/page";
-import Status from "./status/page";
-import Why from "./why/page";
-import LoadingSpinner from "@/app/LoadingSpinner/page";
-import HomeIcons from "@/app/HomeIcons/page";
-import QuickLinksFloatingPanel from "@/app/QuickLinksFloatingPanel/page";
-import { SiteSettingsProvider } from "@/app/context/SiteSettingsContext";
-const AboutUs = () => {
-  const [homeData, setHomeData] = useState(null);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const entries = await getContent2("aboutUsPage");
-        const fields = entries[0]?.fields;
-
-        const banner = fields?.banner?.fields;
-        const paragraphSection = fields?.paragraphSectionData?.fields;
-        const features = fields?.featuresData?.fields;
-        const coreTeam = fields?.coreTeam?.fields;
-        const secondAnnouncement = fields?.secondAnnouncementData?.fields;
-        const statusData = fields?.statusdata?.fields;
-
-        // Extract background image for core team
-        const bgImage = coreTeam?.bgImage?.fields?.file?.url
-          ? `https:${coreTeam.bgImage.fields.file.url}`
-          : "";
-
-     
-       
-
-        setHomeData({
-          banner: {
-            image: banner?.image?.fields?.file?.url
-              ? `https:${banner.image.fields.file.url}`
-              : "",
-            title: banner?.title,
-            subtitle: banner?.subtitle,
-          },
-          paragraphSectionData: paragraphSection,
-          featuresData: features,
-          coreTeam: {
-            bgImage,
-            coreTitle: coreTeam?.title || "",
-            coreSubtitle: coreTeam?.subtitle || "",
-            teamData:coreTeam?.teamMembers || [],
-          },
-          statusData:statusData,
-          secondAnnouncementData: secondAnnouncement,
-        });
-      } catch (err) {
-        console.error("❌ Error fetching about data:", err);
-        setError(err.message);
-      }
-    }
-
-    fetchData();
-  }, []);
-
-  if (error) {
-    return <div>Error loading content: {error}</div>;
-  }
-
-  if (!homeData) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <LoadingSpinner />
-      </div>
-    );
-  }
- 
-  
-
-
-  return (
-    <div>
-       <SiteSettingsProvider>
-      <QuickLinksProvider>
-        <Header />
-        <HomeIcons />
-              <QuickLinksFloatingPanel  />
-        <BanenerComponent data={homeData.banner} />
-       <Why data={homeData.paragraphSectionData} />
-        <Status statusSection={homeData.statusData} />
-        {/* <FeatureSection data={homeData.featuresData} /> */}
-        <CoreTeam
-          bgImage={homeData.coreTeam.bgImage}
-          title={homeData.coreTeam.coreTitle}
-          subtitle={homeData.coreTeam.coreSubtitle}
-          teamMembers={homeData.coreTeam.teamData}
-        />
-        <AnnounceContent announcementData={homeData.secondAnnouncementData} />
-        <Footer />
-      </QuickLinksProvider></SiteSettingsProvider>
-    </div>
-  );
+export const metadata = {
+  title: "About Us | Nouse Homes",
+  description:
+    "Discover Nouse Homes – luxury home builders and architects in Kerala. Learn about our vision, core team, and commitment to crafting premium living spaces.",
+  keywords: [
+    "Nouse Homes",
+    "about Nouse Homes",
+    "luxury builders Kerala",
+    "architects Kerala",
+    "premium homes Kerala",
+    "home construction Kerala",
+  ],
+  openGraph: {
+    title: "About Us | Nouse Homes",
+    description:
+      "Meet the Nouse Homes team – blending creativity and engineering to build luxury homes across Kerala.",
+    url: "https://www.nousehomes.com/about",
+    siteName: "Nouse Homes",
+    images: [
+      {
+        url: "https://www.nousehomes.com/shade1.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Nouse Homes team – Luxury builders in Kerala",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us | Nouse Homes",
+    description:
+      "Discover the Nouse Homes vision and meet our team of architects and builders crafting premium homes in Kerala.",
+    images: ["https://www.nousehomes.com/shade1.jpg"],
+  },
 };
 
-export default AboutUs;
+export default function Page() {
+  return <AboutUs />;
+}

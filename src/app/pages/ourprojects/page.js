@@ -1,93 +1,47 @@
-"use client";
-import { useEffect, useState } from "react";
-import Header from "@/app/Header/page";
-import Footer from "@/app/Footer/page";
-import BanenerComponent from "@/app/BannerComponent/page";
-import LoadingSpinner from "@/app/LoadingSpinner/page";
-import HomeIcons from "@/app/HomeIcons/page";
-import QuickLinksFloatingPanel from "@/app/QuickLinksFloatingPanel/page";
-import { getContent2 } from "@/contentful/page";
-import { QuickLinksProvider } from "@/app/context/quickLinks";
-import ProjectCard from "@/app/ProjectCard/page";
-import { SiteSettingsProvider } from "@/app/context/SiteSettingsContext";
-const OurProjects = () => {
-  const [projectData, setProjectData] = useState(null);
-  const [error, setError] = useState(null);
+import OurProjects from "./projectscomponent/page";
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const entries = await getContent2("ourprojectspage");
-        const fields = entries[0]?.fields;
-        const resolvedProjects = (fields.projects || []).map((project, idx) => {
-          const galleryItem =
-            project.fields?.projectsGallery?.[0]?.fields || {};
-          const galleryImages =
-            galleryItem.images?.map((img) => img.fields?.file?.url) || [];
 
-          return {
-            id: project.sys?.id || "",
-            projectname: project.fields?.projectname || "",
-            image: project.fields?.image?.fields?.file?.url || "",
-            projectsGallery: galleryImages,
-            info: {
-              title: galleryItem.title || "",
-              location: galleryItem.location || "",
-              floorArea: galleryItem.floorArea || "",
-              plotArea: galleryItem.plotArea || "",
-            },
-          };
-        });
 
-        const formattedData = {
-          title: fields.title || "",
-          subtitle: fields.subtitle || "",
-          image: fields.image?.fields?.file?.url || "",
-          bgimage: fields.bgimage?.fields?.file?.url || "",
-          buttonText: fields.buttonText || "",
-          projects: resolvedProjects,
-        };
-
-        setProjectData(formattedData);
-      } catch (err) {
-        console.error("❌ Error fetching project page data:", err);
-        setError(err.message);
-      }
-    }
-
-    fetchData();
-  }, []);
-
- 
-
-  if (error) return <div>Error loading content: {error}</div>;
-  if (!projectData) return (
-      <div className="flex items-center justify-center h-screen">
-        <LoadingSpinner />
-      </div>
-    );
-
-  return (
-    <div>
-      <SiteSettingsProvider>
-      <QuickLinksProvider>
-        <Header />
-        <QuickLinksFloatingPanel />
-        <HomeIcons />
-        <BanenerComponent
-          data={{
-            title: projectData.title,
-            subtitle: projectData.subtitle,
-            image: projectData.image,
-          }}
-        />
-
-        <ProjectCard />
-
-        <Footer />
-      </QuickLinksProvider></SiteSettingsProvider>
-    </div>
-  );
+export const metadata = {
+  title: "Our Projects | Nouse Homes – Luxury Builders & Architects in Kerala",
+  description:
+    "Explore Nouse Homes’ portfolio of luxury residences, premium villas, and architectural projects across Kerala. Discover craftsmanship, innovation, and timeless design.",
+  keywords: [
+    "Nouse Homes projects",
+    "Luxury homes Kerala",
+    "Premium villas Kerala",
+    "Architectural design Kerala",
+    "Kerala home builders",
+    "Luxury house projects Kerala",
+    "Modern home architecture Kerala",
+  ],
+  openGraph: {
+    title: "Our Projects | Nouse Homes – Luxury Builders in Kerala",
+    description:
+      "Showcasing our finest work: luxury homes, premium villas, and architectural masterpieces across Kerala.",
+    url: "https://www.nousehomes.com/projects",
+    siteName: "Nouse Homes",
+    images: [
+      {
+        url: "https://www.nousehomes.com/og-projects.jpg", // Replace with real banner/project image
+        width: 1200,
+        height: 630,
+        alt: "Nouse Homes Projects",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Our Projects | Nouse Homes – Luxury Homes in Kerala",
+    description:
+      "Discover Nouse Homes’ signature projects – luxury villas and premium homes across Kerala.",
+    images: ["https://www.nousehomes.com/og-projects.jpg"],
+  },
 };
 
-export default OurProjects;
+
+export default function Page() {
+  return <OurProjects />;
+}
