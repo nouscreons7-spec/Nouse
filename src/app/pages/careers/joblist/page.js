@@ -1,12 +1,19 @@
 import { FaMapMarkerAlt, FaGraduationCap, FaCalendarAlt } from "react-icons/fa";
-
+import { useSiteSettings } from "@/app/context/SiteSettingsContext";
 const JobList = ({ bgImage, jobList }) => {
+
 if (!jobList) return null
   
+   const { settings } = useSiteSettings() || {};
   return (
     <div
       className="bg-cover bg-center  py-12 px-4 md:px-12"
-      style={{ backgroundImage: `url(${bgImage})` }}
+      style={{ backgroundImage: `url(${bgImage})`,
+       fontFamily: settings?.fontFamily,
+          color: settings?.fontColor,
+     }}
+
+      
     >
       <div className="max-w-5xl mx-auto bg-white bg-opacity-70 rounded-lg p-6 space-y-10">
         {jobList.map((job, index) => (
@@ -14,7 +21,7 @@ if (!jobList) return null
             key={index}
             className="border-b border-gray-400 pb-6 last:border-none"
           >
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            <h2 className="text-xl font-semibold  mb-4">
               {job.title}
             </h2>
 
@@ -31,7 +38,9 @@ if (!jobList) return null
               {job.experience && (
                 <div className="flex items-center gap-2">
                   <FaCalendarAlt className="text-gray-600" />
-                  <span className="bg-gray-200 px-2 py-1 rounded text-xs">
+                  <span className="bg-gray-200 px-2 py-1 rounded text-xs"
+                  
+                  >
                     {job.experience}
                   </span>
                 </div>

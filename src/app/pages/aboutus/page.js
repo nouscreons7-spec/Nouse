@@ -15,7 +15,7 @@ import Why from "./why/page";
 import LoadingSpinner from "@/app/LoadingSpinner/page";
 import HomeIcons from "@/app/HomeIcons/page";
 import QuickLinksFloatingPanel from "@/app/QuickLinksFloatingPanel/page";
-
+import { SiteSettingsProvider } from "@/app/context/SiteSettingsContext";
 const AboutUs = () => {
   const [homeData, setHomeData] = useState(null);
   const [error, setError] = useState(null);
@@ -75,7 +75,7 @@ const AboutUs = () => {
 
   if (!homeData) {
     return (
-      <div>
+      <div className="flex items-center justify-center h-screen">
         <LoadingSpinner />
       </div>
     );
@@ -83,8 +83,10 @@ const AboutUs = () => {
  
   
 
+
   return (
     <div>
+       <SiteSettingsProvider>
       <QuickLinksProvider>
         <Header />
         <HomeIcons />
@@ -92,7 +94,7 @@ const AboutUs = () => {
         <BanenerComponent data={homeData.banner} />
        <Why data={homeData.paragraphSectionData} />
         <Status statusSection={homeData.statusData} />
-        <FeatureSection data={homeData.featuresData} />
+        {/* <FeatureSection data={homeData.featuresData} /> */}
         <CoreTeam
           bgImage={homeData.coreTeam.bgImage}
           title={homeData.coreTeam.coreTitle}
@@ -101,7 +103,7 @@ const AboutUs = () => {
         />
         <AnnounceContent announcementData={homeData.secondAnnouncementData} />
         <Footer />
-      </QuickLinksProvider>
+      </QuickLinksProvider></SiteSettingsProvider>
     </div>
   );
 };

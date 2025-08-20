@@ -1,8 +1,8 @@
 "use client";
-
+import { useSiteSettings } from "@/app/context/SiteSettingsContext";
 const CoreTeam = ({ bgImage, title, subtitle, teamMembers }) => {
 
-  
+    const { settings } = useSiteSettings() || {};
   return (
     <div
       className="bg-cover bg-center py-10 px-6"
@@ -10,10 +10,14 @@ const CoreTeam = ({ bgImage, title, subtitle, teamMembers }) => {
         backgroundImage: `url(${bgImage})`,
        
         backgroundBlendMode: "overlay",
+         fontFamily: settings?.fontFamily,
+          color: settings?.fontColor,
       }}
     >
-      <div className="text-center text-white mb-16">
-        <p className="uppercase tracking-widest text-gray-300 mb-8 text-2xl md:text-4xl">
+      <div className="text-center  mb-16"
+       
+      >
+        <p className="uppercase tracking-widest  mb-8 text-2xl md:text-4xl">
           {subtitle}
         </p>
         <h2 className="text-2xl md:text-4xl font-bold">{title}</h2>
@@ -29,7 +33,7 @@ const CoreTeam = ({ bgImage, title, subtitle, teamMembers }) => {
           return (
             <div
               key={idx}
-              className="bg-[#111111] bg-opacity-80 rounded-2xl shadow-xl overflow-hidden text-center text-white p-6 flex flex-col items-center"
+              className="bg-[#111111] bg-opacity-80 rounded-2xl shadow-xl overflow-hidden text-center  p-6 flex flex-col items-center"
             >
               <div className="w-40 h-40 relative mb-4 rounded-lg overflow-hidden shadow-md">
                 <img
@@ -39,7 +43,7 @@ const CoreTeam = ({ bgImage, title, subtitle, teamMembers }) => {
                 />
               </div>
               <h3 className="font-semibold text-lg">{memberFields?.name}</h3>
-              <p className="text-sm text-gray-300 mt-1">
+              <p className="text-sm  mt-1">
                 {memberFields?.title}
               </p>
             </div>

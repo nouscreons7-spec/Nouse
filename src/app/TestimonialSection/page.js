@@ -3,10 +3,13 @@
 import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
+import { useSiteSettings } from "../context/SiteSettingsContext";
+
+
 
 const TestimonialSection = ({ data }) => {
   const [startIndex, setStartIndex] = useState(0);
-
+  const { settings } = useSiteSettings() || {};
   const items = data?.items || [];
   const bgUrl = data?.bgImage?.fields?.file?.url
     ? `https:${data.bgImage.fields.file.url}`
@@ -26,18 +29,31 @@ const TestimonialSection = ({ data }) => {
   ];
   console.log(data, bgUrl);
   return (
+   
     <div
       className="w-full py-20 px-4 bg-cover bg-center"
       style={{ backgroundImage: `url(${bgUrl})` }}
     >
       {/* Title & Subtitle */}
-      <div className="flex flex-col items-center justify-center w-full text-center text-white mb-12">
+      <div
+        className="flex flex-col items-center justify-center w-full text-center  mb-12"
+        style={{
+          fontFamily: settings?.fontFamily,
+          color: settings?.fontColor,
+        }}
+      >
         <p className="text-4xl font-bold mb-4">{data?.title}</p>
         <p className="text-xl">{data?.subtitle}</p>
       </div>
 
       {/* Testimonials Section */}
-      <div className="max-w-7xl mx-auto relative">
+      <div
+        className="max-w-7xl mx-auto relative"
+        style={{
+          fontFamily: settings?.fontFamily,
+          color: settings?.fontColor,
+        }}
+      >
         <div className="flex gap-6 overflow-x-auto md:overflow-hidden flex-nowrap scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
           {visibleTestimonials.map((item, idx) => {
             const name = item?.fields?.name || `Client ${idx + 1}`;
@@ -84,7 +100,7 @@ const TestimonialSection = ({ data }) => {
                       <FaStar key={i} />
                     ))}
                   </div>
-                  <p className="text-gray-600 text-base md:text-lg mt-2 max-w-[90%]">
+                  <p className=" text-base md:text-lg mt-2 max-w-[90%]">
                     {review}
                   </p>
                 </div>

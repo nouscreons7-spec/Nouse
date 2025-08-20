@@ -2,20 +2,29 @@
 
 import React from "react";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { useSiteSettings } from "../context/SiteSettingsContext";
+
 const FeatureSection = ({ data }) => {
   if (!data || !data.items) {
     return null; 
+
   }
+  
+console.log(data.items,"saTSA");
 
   const backgroundImage = `https:${data.bgimage.fields.file.url}`;
-
+ const { settings } = useSiteSettings() || {};
   return (
   <div
     className="w-full py-16 px-4 bg-cover bg-center"
     style={{ backgroundImage: `url('${backgroundImage}')` }}
-  >
-    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-12 sm:px-6">
-      {data.items.map((item, index) => {
+  > 
+    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-12 sm:px-6"
+     style={{
+          fontFamily: settings?.fontFamily,
+          color: settings?.fontColor,
+        }}>
+      {data?.items.map((item, index) => {
         const { title, description, image } = item.fields;
         const imageUrl = image?.fields?.file?.url
           ? `https:${image.fields.file.url}`
@@ -24,7 +33,7 @@ const FeatureSection = ({ data }) => {
         return (
           <div
             key={index}
-            className="bg-black text-white p-6 rounded-lg shadow-lg text-center"
+            className="  p-6 rounded-lg shadow-lg text-center"
           >
             <h2 className="text-xl sm:text-2xl font-semibold mb-6">{title}</h2>
 
@@ -38,7 +47,7 @@ const FeatureSection = ({ data }) => {
               )}
             </div>
 
-            <div className="text-gray-300 text-base sm:text-lg mt-4">
+            <div className="text-base sm:text-lg mt-4">
               {description && documentToReactComponents(description)}
             </div>
           </div>

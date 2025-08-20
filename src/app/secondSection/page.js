@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-
+import { useSiteSettings } from "../context/SiteSettingsContext";
 const SlidingProjects = ({ categories }) => {
   if (!categories || categories.length === 0) return null;
 
@@ -13,7 +13,7 @@ const SlidingProjects = ({ categories }) => {
   const imageUrl = current?.fields?.image?.fields?.file?.url
     ? `https:${current.fields.image.fields.file.url}`
     : "";
-
+  const { settings } = useSiteSettings();
   const title = current?.fields?.title || "Untitled";
   const keyLabel = current?.fields?.key || `Category ${selectedIndex + 1}`;
 
@@ -28,7 +28,13 @@ const SlidingProjects = ({ categories }) => {
   };
 
   return (
-    <div className="relative w-full p-2 mx-auto md:px-10">
+    <div
+      className="relative w-full p-2 mx-auto md:px-10"
+      style={{
+        fontFamily: settings?.fontFamily,
+        color: settings?.fontColor,
+      }}
+    >
       {/* Main Image Display */}
       <div
         className="relative w-full h-[550px] bg-cover bg-center rounded-lg overflow-hidden"
@@ -56,16 +62,18 @@ const SlidingProjects = ({ categories }) => {
       </button>
 
       {/* Category Buttons */}
-      <div className="absolute bottom-1/2 left-1/2 transform -translate-x-1/2 max-w-2xl  bg-opacity-30 rounded-lg grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 w-[80%] bottom-8">
+      <div className="absolute left-1/2 transform -translate-x-1/2 bottom-8 max-w-2xl bg-opacity-30 rounded-lg grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 w-[80%]">
         {categories.map((cat, index) => (
           <button
             key={cat.fields?.key || index}
             onClick={() => setSelectedIndex(index)}
-            className={`cursor-pointer px-4 py-2 rounded-lg text-white text-xs w-full h-10 ${
-              selectedIndex === index
-                ? "bg-gray-900"
-                : "bg-gray-800 hover:bg-gray-700"
-            }`}
+            style={{
+              backgroundColor:
+                selectedIndex === index
+                  ? settings?.buttonColor
+                  : settings?.secondaryColor,
+            }}
+            className="cursor-pointer px-4 py-2 rounded-lg text-white text-xs w-full h-10"
           >
             {(cat.fields?.key || `Category ${index + 1}`).toUpperCase()}
           </button>

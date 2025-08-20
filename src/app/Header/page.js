@@ -8,7 +8,7 @@ import { getContent } from "@/contentful/page";
 import LoadingSpinner from "../LoadingSpinner/page";
 import LogoImage from "../logo/page";
 import { useQuickLinks } from "../context/quickLinks";
-
+import { useSiteSettings } from "../context/SiteSettingsContext";
 import { QuickLinksProvider } from "@/app/context/quickLinks";
 const Header = () => {
   const [showDrawer, setShowDrawer] = useState(false);
@@ -19,11 +19,10 @@ const Header = () => {
     logoUrl: "",
   });
   const router = useRouter();
-
- 
+ const { settings } = useSiteSettings() || {};
   const data = useQuickLinks();
-   const quickLinks = data?.quickLinks || [];
-  
+  const quickLinks = data?.quickLinks || [];
+
   const onClose = () => setShowDrawer(false);
 
   useEffect(() => {
@@ -33,7 +32,7 @@ const Header = () => {
 
         if (entries.length > 0) {
           const fields = entries[0].fields;
-          
+
           setNavData({
             text: fields.quoteText || "",
             navItems:
@@ -65,53 +64,60 @@ const Header = () => {
   };
 
   return (
-  
-        <QuickLinksProvider>
-    <header
-      className={`fixed top-0 left-0 w-full h-[17%] z-30 p-4 flex items-center justify-between transition-colors duration-300 ${
-        isScrolled
-          ? "bg-white/10 backdrop-blur-sm text-yellow-500 shadow-md"
-          : "bg-gradient-to-b from-black/80 to-transparent text-white"
-      }`}
-    >
-      <Drawer isOpen={showDrawer} onClose={onClose} navData={navData.navItems} quickLinks={quickLinks}/>
-
-      <div
-        onClick={() => router.push("/")}
-        className="cursor-pointer flex items-center md:justify-start text-2xl font-bold w-auto md:w-[20%]"
+    <QuickLinksProvider>
+      <header
+        className={`fixed top-0 left-0 w-full h-[17%] z-30 p-4 flex items-center justify-between transition-colors duration-300 ${
+          isScrolled
+            ? "bg-white/10 backdrop-blur-sm text-yellow-500 shadow-md"
+            : "bg-gradient-to-b from-black/80 to-transparent text-white"
+        }`}
       >
-        {navData.logoUrl ? (
-          <LogoImage src={navData.logoUrl} />
-        ) : (
-          <LoadingSpinner />
-        )}
-      </div>
-
-      {/* Desktop Navigation */}
-      <nav className="hidden md:flex justify-evenly items-center w-full font-bold space-x-6">
-        {navData.navItems.map((item, index) => (
-          <div
-            key={index}
-            className="hover:text-gray-500 transition cursor-pointer"
-            onClick={() => viewContentPage(item.label)}
-          >
-            {item.label.toUpperCase()}
-          </div>
-        ))}
-      </nav>
-
-      {/* Mobile Menu Button */}
-      <div className="md:hidden">
-        <FiMenu
-          className={`text-3xl cursor-pointer transition-colors duration-300 ${
-            isScrolled ? "text-black" : "text-white"
-          }`}
-          onClick={() => setShowDrawer(true)}
+        <Drawer
+          isOpen={showDrawer}
+          onClose={onClose}
+          navData={navData.navItems}
+          quickLinks={quickLinks}
         />
-      </div>
-    </header>
-    </QuickLinksProvider>
 
+        <div
+          onClick={() => router.push("/")}
+          className="cursor-pointer flex items-center md:justify-start text-2xl font-bold w-auto md:w-[20%]"
+        >
+          {navData.logoUrl ? (
+            <LogoImage src={navData.logoUrl} />
+          ) : (
+            <LoadingSpinner />
+          )}
+        </div>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex justify-evenly items-center w-full font-bold space-x-6">
+          {navData.navItems.map((item, index) => (
+            <div
+              key={index}
+              className="hover:text-gray-500 transition cursor-pointer"
+              style={{
+                fontFamily: settings?.fontFamily,
+                color: settings?.primaryColor
+              }}
+              onClick={() => viewContentPage(item.label)}
+            >
+              {item.label.toUpperCase()}
+            </div>
+          ))}
+        </nav>
+
+        {/* Mobile Menu Button */}
+        <div className="md:hidden">
+          <FiMenu
+            className={`text-3xl cursor-pointer transition-colors duration-300 ${
+              isScrolled ? "text-black" : "text-white"
+            }`}
+            onClick={() => setShowDrawer(true)}
+          />
+        </div>
+      </header>
+    </QuickLinksProvider>
   );
 };
 

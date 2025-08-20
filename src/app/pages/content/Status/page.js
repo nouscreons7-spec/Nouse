@@ -1,14 +1,18 @@
+
+import { useSiteSettings } from "@/app/context/SiteSettingsContext";
 const Status = ({ status }) => {
   if (!status) return null;
   const backgroundImageUrl = status[0]?.backgroundImage?.fields?.file?.url;
-  console.log(status, "📦 status content");
+  const { settings } = useSiteSettings() || {};
 return (
   <div
-    className="bg-cover bg-center bg-no-repeat py-16 px-4 sm:px-8 md:px-16 lg:px-28 text-white"
+    className="bg-cover bg-center bg-no-repeat py-16 px-4 sm:px-8 md:px-16 lg:px-28 "
     style={{
       backgroundImage: backgroundImageUrl
         ? `url(https:${backgroundImageUrl})`
         : "none",
+         fontFamily: settings?.fontFamily,
+        color: settings?.fontColor,
     }}
   >
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-20 text-center">

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-
+import { useSiteSettings } from "../context/SiteSettingsContext";
 const Advertisement = ({ data }) => {
   if (!data || !data.items) return null;
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,16 +23,22 @@ const Advertisement = ({ data }) => {
   const backgroundUrl = data?.bgimage?.fields?.file?.url
     ? `https:${data.bgimage.fields.file.url}`
     : "";
-
+  const { settings } = useSiteSettings() || {};
   return (
-    <section className="relative w-full">
+    <section
+      className="relative w-full"
+      style={{
+        fontFamily: settings?.fontFamily,
+        color: settings?.fontColor,
+      }}
+    >
       <div
         className="w-full h-[700px] bg-cover bg-center flex flex-col justify-center items-center px-4 sm:px-10 text-center"
         style={{
           backgroundImage: `url(${backgroundUrl})`,
         }}
       >
-        <h2 className="text-white text-2xl sm:text-3xl font-semibold mb-6 max-w-2xl">
+        <h2 className=" text-2xl sm:text-3xl font-semibold mb-6 max-w-2xl">
           {data.title}
         </h2>
 
@@ -64,11 +70,15 @@ const Advertisement = ({ data }) => {
               <button
                 key={index}
                 onClick={() => selectSlide(index)}
-                className={`px-3 py-1 text-sm border transition ${
-                  index === currentIndex
-                    ? "bg-white text-black"
-                    : "bg-white/20 text-white"
-                } rounded`}
+               style={{
+                 color: settings?.fontColor,
+              backgroundColor:
+                index === currentIndex
+                  ? settings?.buttonColor
+                  : settings?.secondaryColor,
+            }}
+             className="cursor-pointer px-3 py-1 sm:px-4 py-2"
+
               >
                 {item.fields.projectItem?.toUpperCase()}
               </button>

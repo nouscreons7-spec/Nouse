@@ -10,6 +10,7 @@ import LoadingSpinner from "@/app/LoadingSpinner/page";
 import { getContent2 } from "@/contentful/page";
 import HomeIcons from "@/app/HomeIcons/page";
 import QuickLinksFloatingPanel from "@/app/QuickLinksFloatingPanel/page";
+import { SiteSettingsProvider } from "@/app/context/SiteSettingsContext";
 
 const Careers = () => {
   const [careersData, setCareersData] = useState(null);
@@ -55,11 +56,16 @@ const Careers = () => {
   }, []);
 
   if (error) return <div>Error loading content: {error}</div>;
-  if (!careersData) return <div><LoadingSpinner /></div>;
+  if (!careersData) return (
+      <div className="flex items-center justify-center h-screen">
+        <LoadingSpinner />
+      </div>
+    );
  
   
   return (
     <div>
+      <SiteSettingsProvider>
       <QuickLinksProvider>
         <Header />
              <QuickLinksFloatingPanel  />
@@ -73,7 +79,7 @@ const Careers = () => {
         />
         <JobList jobList={careersData.jobs} bgImage={careersData.bgimage} />
         <Footer />
-      </QuickLinksProvider>
+      </QuickLinksProvider></SiteSettingsProvider>
     </div>
   );
 };

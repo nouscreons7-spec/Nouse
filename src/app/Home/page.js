@@ -16,6 +16,7 @@ import QuickLinksFloatingPanel from "../QuickLinksFloatingPanel/page";
 import { getContent } from "@/contentful/page";
 import LoadingSpinner from "../LoadingSpinner/page";
 import HomeIcons from "../HomeIcons/page";
+import { SiteSettingsProvider } from "../context/SiteSettingsContext";
 const Home = () => {
   const [homeData, setHomeData] = useState(null);
   const [error, setError] = useState(null);
@@ -60,6 +61,7 @@ const Home = () => {
 
   return (
     <div>
+      <SiteSettingsProvider>
       <Header />
       <Banner data={homeData.homebanner} />
      <QuickLinksFloatingPanel  />
@@ -77,6 +79,7 @@ const Home = () => {
       <Advertisement data={homeData.AdvertisementSection}/>
       <AnnounceContent announcementData={homeData.secondAnnouncementData} />
       <Footer />
+      </SiteSettingsProvider>
     </div>
   );
 };

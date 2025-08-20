@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
-
+import { useSiteSettings } from "@/app/context/SiteSettingsContext";
 const ArchitectureShowcase = ({ architechData }) => {
   if (!architechData) return null;
-
+  const { settings } = useSiteSettings() || {};
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -24,11 +24,13 @@ const ArchitectureShowcase = ({ architechData }) => {
 
   return (
     <section
-      className="bg-cover bg-center text-white py-20"
+      className="bg-cover bg-center  py-20"
       style={{
         backgroundImage: backgroundImageUrl
           ? `url(https:${backgroundImageUrl})`
           : "none",
+           fontFamily: settings?.fontFamily,
+        color: settings?.fontColor,
       }}
     >
       <div className="max-w-4xl mx-auto text-center">
