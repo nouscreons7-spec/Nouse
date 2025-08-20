@@ -17,6 +17,69 @@ import QuickLinksFloatingPanel from "@/app/QuickLinksFloatingPanel/page";
 import { QuickLinksProvider } from "@/app/context/quickLinks";
 import HomeIcons from "@/app/HomeIcons/page";
 
+
+
+export async function generateMetadata({ searchParams }) {
+  const keyword = searchParams?.keyword;
+
+  if (!keyword) {
+    return {
+      title: "Nouse Homes | Premium Homes & Architecture in Kerala",
+      description:
+        "Discover luxury homes and premium architecture by Nouse Homes. Explore our projects, designs, and services.",
+    };
+  }
+
+  try {
+    const entries = await getContent(keyword);
+    const fields = entries[0]?.fields;
+
+    return {
+      title: `${fields?.pageTitle || keyword} | Nouse Homes`,
+      description:
+        fields?.pageDescription ||
+        `Explore ${keyword} projects and premium homes by Nouse Homes in Kerala.`,
+      openGraph: {
+        title: `${fields?.pageTitle || keyword} | Nouse Homes`,
+        description:
+          fields?.pageDescription ||
+          `Explore ${keyword} projects and premium homes by Nouse Homes.`,
+        url: `https://www.nousehomes.com/content?keyword=${keyword}`,
+        images: [
+          {
+            url: fields?.ogImage?.fields?.file?.url
+              ? `https:${fields.ogImage.fields.file.url}`
+              : "https://www.nousehomes.com/default-og.jpg",
+            width: 1200,
+            height: 630,
+            alt: fields?.pageTitle || "Nouse Homes Project",
+          },
+        ],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${fields?.pageTitle || keyword} | Nouse Homes`,
+        description:
+          fields?.pageDescription ||
+          `Explore ${keyword} projects and premium homes by Nouse Homes.`,
+        images: [
+          fields?.ogImage?.fields?.file?.url
+            ? `https:${fields.ogImage.fields.file.url}`
+            : "https://www.nousehomes.com/default-og.jpg",
+        ],
+      },
+    };
+  } catch (err) {
+    console.error("SEO Metadata error:", err);
+    return {
+      title: "Nouse Homes | Premium Homes & Architecture in Kerala",
+      description:
+        "Discover luxury homes and premium architecture by Nouse Homes. Explore our projects, designs, and services.",
+    };
+  }
+}
+
+
 const ContentPage = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);

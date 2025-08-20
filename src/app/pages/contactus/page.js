@@ -1,86 +1,48 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
-import BanenerComponent from "@/app/BannerComponent/page";
-import ContactDetails from "@/app/ContactDetails/page";
-import Footer from "@/app/Footer/page";
-import Header from "@/app/Header/page";
-import MapEmbed from "@/app/MapEmbded/page";
-import { QuickLinksProvider } from "@/app/context/quickLinks";
-import { getContent2 } from "@/contentful/page";
-import LoadingSpinner from "@/app/LoadingSpinner/page";
-import HomeIcons from "@/app/HomeIcons/page";
-import QuickLinksFloatingPanel from "@/app/QuickLinksFloatingPanel/page";
-import { SiteSettingsProvider } from "@/app/context/SiteSettingsContext";
-const ContactUs = () => {
-  const [contactData, setContactData] = useState(null);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const entries = await getContent2("contactpage");
-        const fields = entries[0]?.fields;
-
-        const formattedData = {
-          title: fields.title || "",
-          subtitle: fields.subtitle || "",
-          mail: fields.mail || "",
-          phoneNumbers: fields.phoneNumbers || [],
-          mapImage: fields.mapImage || "",
-          officeAddress: fields.officeAddress || "",
-          factoryAddress: fields.factoryAddress || "",
-          headings: fields.headings || {},
-          image: fields.bannerImage?.fields?.file?.url || "",
-          bgimage: fields.bgImage?.fields?.file?.url || "",
-        };
-       console.log(formattedData);
-       
-        setContactData(formattedData);
-      } catch (err) {
-        console.error("❌ Error fetching contact page data:", err);
-        setError(err.message);
-      }
-    }
-
-    fetchData();
-  }, []);
-
-  if (error) return <div>Error loading content: {error}</div>;
-  if (!contactData) return (
-      <div className="flex items-center justify-center h-screen">
-        <LoadingSpinner />
-      </div>
-    );
 
 
-  return (
-    <div>
-      <SiteSettingsProvider>
-      <QuickLinksProvider>
-        <Header />
-             <QuickLinksFloatingPanel  />
-        <HomeIcons />
-        <BanenerComponent
-          data={{
-            title: contactData.title,
-            subtitle: contactData.subtitle,
-            image: contactData.image,
-          }}
-        />
-        <div
-          className="flex flex-col lg:flex-row bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${contactData.bgimage})` }}
-        >
-          <div className="bg-opacity-80 w-full flex justify-center items-center flex-col md:flex-row">
-            <ContactDetails data={contactData} />
-            <MapEmbed image={contactData.mapImage} />
-          </div>
-        </div>
-        <Footer />
-      </QuickLinksProvider></SiteSettingsProvider>
-    </div>
-  );
+
+
+
+import ContactUs from "./contactcomponent/page";
+export const metadata = {
+  title: "Contact Nouse Homes | Luxury Home Builders in Kerala",
+  description:
+    "Get in touch with Nouse Homes today. Contact our team of expert architects and builders for consultations, project inquiries, and collaborations across Kerala.",
+  keywords: [
+    "Contact Nouse Homes",
+    "Luxury home builders Kerala",
+    "Architects Kerala",
+    "Home construction Kerala",
+    "Contact builders Kerala",
+    "Luxury house design Kerala",
+  ],
+  openGraph: {
+    title: "Contact Nouse Homes | Luxury Builders in Kerala",
+    description:
+      "Reach out to Nouse Homes for expert guidance on your dream home. Available for consultations, inquiries, and collaborations.",
+    url: "https://www.nousehomes.com/contact",
+    siteName: "Nouse Homes",
+    images: [
+      {
+        url: "https://www.nousehomes.com/og-contact.jpg", // Replace with actual contact page banner
+        width: 1200,
+        height: 630,
+        alt: "Contact Nouse Homes",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Nouse Homes | Luxury Home Builders in Kerala",
+    description:
+      "Talk to our architects and builders for luxury home projects in Kerala. Let’s create your dream home together.",
+    images: ["https://www.nousehomes.com/og-contact.jpg"], // Same image as OG
+  },
 };
 
-export default ContactUs;
+
+export default function Page() {
+  return <ContactUs />;
+}
