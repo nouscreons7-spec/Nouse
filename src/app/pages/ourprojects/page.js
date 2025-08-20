@@ -8,38 +8,36 @@ import HomeIcons from "@/app/HomeIcons/page";
 import QuickLinksFloatingPanel from "@/app/QuickLinksFloatingPanel/page";
 import { getContent2 } from "@/contentful/page";
 import { QuickLinksProvider } from "@/app/context/quickLinks";
-import ProjectView from "@/app/ProjectView/page"; // Make sure this exists
 import ProjectCard from "@/app/ProjectCard/page";
-
+import { SiteSettingsProvider } from "@/app/context/SiteSettingsContext";
 const OurProjects = () => {
   const [projectData, setProjectData] = useState(null);
   const [error, setError] = useState(null);
-  const [showViewer, setShowViewer] = useState(false);
-  const [galleryData, setGalleryData] = useState({ images: [], info: {} });
 
   useEffect(() => {
     async function fetchData() {
       try {
         const entries = await getContent2("ourprojectspage");
         const fields = entries[0]?.fields;
-const resolvedProjects = (fields.projects || []).map((project, idx) => {
-  const galleryItem = project.fields?.projectsGallery?.[0]?.fields || {};
-  const galleryImages = galleryItem.images?.map((img) => img.fields?.file?.url) || [];
+        const resolvedProjects = (fields.projects || []).map((project, idx) => {
+          const galleryItem =
+            project.fields?.projectsGallery?.[0]?.fields || {};
+          const galleryImages =
+            galleryItem.images?.map((img) => img.fields?.file?.url) || [];
 
-  return {
-    id: project.sys?.id || "",
-    projectname: project.fields?.projectname || "",
-    image: project.fields?.image?.fields?.file?.url || "",
-    projectsGallery: galleryImages,
-    info: {
-      title: galleryItem.title || "",
-      location: galleryItem.location || "",
-      floorArea: galleryItem.floorArea || "",
-      plotArea: galleryItem.plotArea || "",
-    },
-  };
-});
-
+          return {
+            id: project.sys?.id || "",
+            projectname: project.fields?.projectname || "",
+            image: project.fields?.image?.fields?.file?.url || "",
+            projectsGallery: galleryImages,
+            info: {
+              title: galleryItem.title || "",
+              location: galleryItem.location || "",
+              floorArea: galleryItem.floorArea || "",
+              plotArea: galleryItem.plotArea || "",
+            },
+          };
+        });
 
         const formattedData = {
           title: fields.title || "",
@@ -60,19 +58,18 @@ const resolvedProjects = (fields.projects || []).map((project, idx) => {
     fetchData();
   }, []);
 
-  const openViewer = (project) => {
-    setGalleryData({
-      images: project.projectsGallery,
-      info: project.info,
-    });
-    setShowViewer(true);
-  };
+ 
 
   if (error) return <div>Error loading content: {error}</div>;
-  if (!projectData) return <LoadingSpinner />;
+  if (!projectData) return (
+      <div className="flex items-center justify-center h-screen">
+        <LoadingSpinner />
+      </div>
+    );
 
   return (
     <div>
+      <SiteSettingsProvider>
       <QuickLinksProvider>
         <Header />
         <QuickLinksFloatingPanel />
@@ -87,9 +84,8 @@ const resolvedProjects = (fields.projects || []).map((project, idx) => {
 
         <ProjectCard />
 
-
         <Footer />
-      </QuickLinksProvider>
+      </QuickLinksProvider></SiteSettingsProvider>
     </div>
   );
 };

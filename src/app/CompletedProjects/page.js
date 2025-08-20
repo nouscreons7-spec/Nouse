@@ -1,20 +1,26 @@
 "use client";
 
 import SlidingProjects from "../secondSection/page";
-
+import { useSiteSettings } from "../context/SiteSettingsContext";
 const CompletedProjects = ({ data }) => {
   if (!data) return null;
 
   const backgroundUrl = data?.bgimage?.fields?.file?.url
     ? `https:${data.bgimage.fields.file.url}`
     : "";
-
+ const { settings } = useSiteSettings() || {};
   return (
     <div
       className="py-16 bg-cover bg-center h-auto flex flex-col items-center justify-center text-center w-full"
       style={{ backgroundImage: `url(${backgroundUrl})` }}
     >
-      <div className="text-center w-[90%] md:w-[50%]">
+      <div
+        className="text-center w-[90%] md:w-[50%]"
+        style={{
+          fontFamily: settings?.fontFamily,
+          color: settings?.fontColor,
+        }}
+      >
         <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold uppercase">
           {data.title}
         </h2>

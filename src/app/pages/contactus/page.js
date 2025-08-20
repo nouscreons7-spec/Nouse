@@ -11,7 +11,7 @@ import { getContent2 } from "@/contentful/page";
 import LoadingSpinner from "@/app/LoadingSpinner/page";
 import HomeIcons from "@/app/HomeIcons/page";
 import QuickLinksFloatingPanel from "@/app/QuickLinksFloatingPanel/page";
-
+import { SiteSettingsProvider } from "@/app/context/SiteSettingsContext";
 const ContactUs = () => {
   const [contactData, setContactData] = useState(null);
   const [error, setError] = useState(null);
@@ -47,11 +47,16 @@ const ContactUs = () => {
   }, []);
 
   if (error) return <div>Error loading content: {error}</div>;
-  if (!contactData) return <LoadingSpinner />;
+  if (!contactData) return (
+      <div className="flex items-center justify-center h-screen">
+        <LoadingSpinner />
+      </div>
+    );
 
 
   return (
     <div>
+      <SiteSettingsProvider>
       <QuickLinksProvider>
         <Header />
              <QuickLinksFloatingPanel  />
@@ -73,7 +78,7 @@ const ContactUs = () => {
           </div>
         </div>
         <Footer />
-      </QuickLinksProvider>
+      </QuickLinksProvider></SiteSettingsProvider>
     </div>
   );
 };

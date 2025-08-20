@@ -6,13 +6,14 @@ import LoadingSpinner from "@/app/LoadingSpinner/page";
 import { getContent2 } from "@/contentful/page";
 import { QuickLinksProvider } from "@/app/context/quickLinks";
 import ProjectView from "@/app/ProjectView/page";
-
+import { useSiteSettings } from "@/app/context/SiteSettingsContext";
 const ProjectCard = () => {
   const [projectData, setProjectData] = useState(null);
   const [error, setError] = useState(null);
   const [showViewer, setShowViewer] = useState(false);
   const [galleryData, setGalleryData] = useState({ images: [], info: {} });
-
+ 
+   const { settings } = useSiteSettings() || {};
   useEffect(() => {
     async function fetchData() {
       try {
@@ -73,7 +74,11 @@ const ProjectCard = () => {
       <QuickLinksProvider>
         <div
           className="w-full bg-gray-100 py-12"
-          style={{ backgroundImage: `url(${projectData.bgimage})` }}
+        
+          style={{backgroundImage: `url(${projectData.bgimage})`,
+       fontFamily: settings?.fontFamily,
+          color: settings?.fontColor,
+     }}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {projectData.projects.map((project, idx) => (
@@ -86,14 +91,14 @@ const ProjectCard = () => {
                   alt={project.projectname}
                   className="w-full h-[248px] min-h-[248px] max-h-[248px] object-cover rounded-lg"
                 />
-                <h3 className="text-lg font-semibold text-gray-800 mt-4 min-h-[48px] max-h-[48px] overflow-hidden">
+                <h3 className="text-lg font-semibold  mt-4 min-h-[48px] max-h-[48px] overflow-hidden">
                   {project.projectname}
                 </h3>
                 <div className="flex items-center justify-center">
                   {projectData.buttonText && (
                     <button
                       onClick={() => openViewer(project)}
-                      className="cursor-pointer mt-4 flex justify-center w-1/2 md:w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition"
+                      className="cursor-pointer mt-4 flex justify-center w-1/2 md:w-full bg-indigo-600  py-2 px-4 rounded-lg hover:bg-indigo-700 transition"
                     >
                       {projectData.buttonText}
                     </button>

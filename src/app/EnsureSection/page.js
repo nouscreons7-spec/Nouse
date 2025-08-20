@@ -1,14 +1,14 @@
 "use client";
 
 import React from "react";
-
+import { useSiteSettings } from "../context/SiteSettingsContext";
 const EnsureSection = ({ data }) => {
   if (!data || !data.items) return null;
 
   const backgroundUrl = data?.bgimage?.fields?.file?.url
     ? `https:${data.bgimage.fields.file.url}`
     : "";
-
+ const { settings } = useSiteSettings() || {};
   return (
     <div
       className="flex items-center justify-center w-full  bg-cover bg-center py-16 "
@@ -18,8 +18,13 @@ const EnsureSection = ({ data }) => {
     >
     
 
-      <div className=" z-10 flex flex-col items-center justify-center px-4">
-        <h2 className="text-white text-5xl font-medium text-center mb-24">
+      <div className=" z-10 flex flex-col items-center justify-center px-4"
+       style={{
+          fontFamily: settings?.fontFamily,
+          color: settings?.fontColor,
+        }}
+      >
+        <h2 className=" text-5xl font-medium text-center mb-24">
           {data.title}
         </h2>
 
@@ -42,7 +47,7 @@ const EnsureSection = ({ data }) => {
                     className="w-16 h-16 object-contain mb-4"
                   />
                 )}
-                <p className="text-white text-md font-medium">
+                <p className="text-md font-medium">
                   {fields.projectItem}
                 </p>
               </div>
