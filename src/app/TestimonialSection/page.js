@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import { useSiteSettings } from "../context/SiteSettingsContext";
+import AnimationWrapper from "../AnimationWrapper/page";
 
 
 
@@ -27,7 +28,7 @@ const TestimonialSection = ({ data }) => {
     items[startIndex],
     items[(startIndex + 1) % items.length],
   ];
-  console.log(data, bgUrl);
+  
   return (
    
     <div
@@ -66,6 +67,7 @@ const TestimonialSection = ({ data }) => {
               : "";
 
             return (
+              <AnimationWrapper key={idx} type="fadeInRight">
               <div
                 key={idx}
                 className="bg-white min-w-full md:min-w-[50%] p-8 rounded-xl shadow-md flex flex-col md:flex-row gap-4"
@@ -91,8 +93,8 @@ const TestimonialSection = ({ data }) => {
                 </div>
 
                 {/* Right Content */}
-                <div className="w-full md:w-1/2 h-auto md:h-[500px] flex flex-col justify-center">
-                  <h3 className="font-semibold text-lg md:text-xl max-w-[90%]">
+                <div className=" text-gray-600 w-full md:w-1/2 h-auto md:h-[500px] flex flex-col justify-center">
+                  <h3 className=" font-semibold text-lg md:text-xl max-w-[90%]">
                     {name}
                   </h3>
                   <div className="flex text-yellow-500 mt-2">
@@ -104,7 +106,7 @@ const TestimonialSection = ({ data }) => {
                     {review}
                   </p>
                 </div>
-              </div>
+              </div></AnimationWrapper>
             );
           })}
         </div>

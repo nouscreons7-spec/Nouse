@@ -8,7 +8,7 @@ const client = createClient({
 export async function getContent(contentType) {
   try {
     const res = await client.getEntries({ content_type: contentType,  include: 3, });
-    console.log("✅ Contentful API Response:", res.items);
+
     return res.items;
   } catch (error) {
     console.error("❌ Error fetching Contentful data:", error.message);
@@ -24,7 +24,7 @@ const client2 = createClient({
 export async function getContent2(contentType) {
   try {
     const res = await client2.getEntries({ content_type: contentType,  include: 3, });
-    console.log("✅ Contentful API Response:form == latest", res.items);
+  
     return res.items;
   } catch (error) {
     console.error("❌ Error fetching Contentful data:", error.message);

@@ -4,11 +4,12 @@ const ContactDetails = ({ data }) => {
   if (!data) return null;
   const { settings } = useSiteSettings() || {};
   return (
+    
     <div
       className="w-full p-6 lg:p-10"
       style={{
         fontFamily: settings?.fontFamily,
-        color: settings?.fontColor,
+        
       }}
     >
       <div className="bg-white bg-opacity-80 shadow-lg rounded-xl p-6 md:p-10  space-y-8"

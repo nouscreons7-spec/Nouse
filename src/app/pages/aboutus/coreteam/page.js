@@ -1,4 +1,5 @@
 "use client";
+import AnimationWrapper from "@/app/AnimationWrapper/page";
 import { useSiteSettings } from "@/app/context/SiteSettingsContext";
 const CoreTeam = ({ bgImage, title, subtitle, teamMembers }) => {
 
@@ -31,6 +32,7 @@ const CoreTeam = ({ bgImage, title, subtitle, teamMembers }) => {
             : "";
 
           return (
+            <AnimationWrapper type="fadeInRight" key={idx}>
             <div
               key={idx}
               className="bg-[#111111] bg-opacity-80 rounded-2xl shadow-xl overflow-hidden text-center  p-6 flex flex-col items-center"
@@ -47,7 +49,7 @@ const CoreTeam = ({ bgImage, title, subtitle, teamMembers }) => {
                 {memberFields?.title}
               </p>
             </div>
-          );
+          </AnimationWrapper>);
         })}
       </div>
     </div>

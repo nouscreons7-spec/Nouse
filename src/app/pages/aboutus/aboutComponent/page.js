@@ -16,6 +16,7 @@ import LoadingSpinner from "@/app/LoadingSpinner/page";
 import HomeIcons from "@/app/HomeIcons/page";
 import QuickLinksFloatingPanel from "@/app/QuickLinksFloatingPanel/page";
 import { SiteSettingsProvider } from "@/app/context/SiteSettingsContext";
+import AnimationWrapper from "@/app/AnimationWrapper/page";
 
 
  
@@ -94,17 +95,17 @@ const AboutUs = () => {
         <HomeIcons />
               <QuickLinksFloatingPanel  />
         <BanenerComponent data={homeData.banner} />
-       <Why data={homeData.paragraphSectionData} />
-        <Status statusSection={homeData.statusData} />
+       <AnimationWrapper type="zoomIn"><Why data={homeData.paragraphSectionData} /></AnimationWrapper>
+        <AnimationWrapper type="zoomIn"><Status statusSection={homeData.statusData} /></AnimationWrapper>
         {/* <FeatureSection data={homeData.featuresData} /> */}
-        <CoreTeam
+        <AnimationWrapper type="fadeUp"> <CoreTeam
           bgImage={homeData.coreTeam.bgImage}
           title={homeData.coreTeam.coreTitle}
           subtitle={homeData.coreTeam.coreSubtitle}
           teamMembers={homeData.coreTeam.teamData}
-        />
-        <AnnounceContent announcementData={homeData.secondAnnouncementData} />
-        <Footer />
+        /></AnimationWrapper>
+       <AnimationWrapper type="zoomIn"><AnnounceContent announcementData={homeData.secondAnnouncementData} /></AnimationWrapper> 
+        <AnimationWrapper type="fadeUp"><Footer /></AnimationWrapper>
       </QuickLinksProvider></SiteSettingsProvider>
     </div>
   );

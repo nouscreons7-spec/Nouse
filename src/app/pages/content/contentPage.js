@@ -16,6 +16,7 @@ import LoadingSpinner from "@/app/LoadingSpinner/page";
 import QuickLinksFloatingPanel from "@/app/QuickLinksFloatingPanel/page";
 import { QuickLinksProvider } from "@/app/context/quickLinks";
 import HomeIcons from "@/app/HomeIcons/page";
+import AnimationWrapper from "@/app/AnimationWrapper/page";
 
 
 
@@ -135,29 +136,30 @@ const ContentPage = () => {
       <Header />
       <QuickLinksFloatingPanel />
       <HomeIcons />
+      <AnimationWrapper>
       {sliderData && (
         <ImageSlider
           images={sliderData.images}
           title={sliderData.title}
           description={sliderData.description}
         />
-      )}
+      )}</AnimationWrapper>
 
-      {paragraphSectionData?.backgroundImage?.fields?.file?.url && (
+     <AnimationWrapper type="fadeInDown"> {paragraphSectionData?.backgroundImage?.fields?.file?.url && (
         <ParagraphSection paragraphSectionData={paragraphSectionData} />
-      )}
+      )}</AnimationWrapper>
 
-      <Status status={status} />
+    <AnimationWrapper type="fadeIn">   <Status status={status} /></AnimationWrapper>
 
-      {secondMessageData && <Message messageData={secondMessageData} />}
-      {architechData && <ArchitectureShowcase architechData={architechData} />}
-      {features && <FeatureGrid features={features} />}
-      {messageData && <Message messageData={messageData} />}
-      {announcementData && (
+     <AnimationWrapper >   {secondMessageData && <Message messageData={secondMessageData} />}</AnimationWrapper>
+      <AnimationWrapper > {architechData && <ArchitectureShowcase architechData={architechData} />}</AnimationWrapper>
+    <AnimationWrapper >   {features && <FeatureGrid features={features} />}</AnimationWrapper>
+     <AnimationWrapper >  {messageData && <Message messageData={messageData} />}</AnimationWrapper > 
+    <AnimationWrapper type="zoomIn" stagger={0.4}> {announcementData && (
         <AnnounceContent announcementData={announcementData} />
-      )}
+      )}</AnimationWrapper> 
 
-      <Footer />
+     <AnimationWrapper stagger={0.4}>  <Footer /></AnimationWrapper>
     </QuickLinksProvider>
   );
 };

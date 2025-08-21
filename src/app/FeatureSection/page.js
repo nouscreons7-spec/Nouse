@@ -3,6 +3,7 @@
 import React from "react";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { useSiteSettings } from "../context/SiteSettingsContext";
+import AnimationWrapper from "../AnimationWrapper/page";
 
 const FeatureSection = ({ data }) => {
   if (!data || !data.items) {
@@ -10,7 +11,7 @@ const FeatureSection = ({ data }) => {
 
   }
   
-console.log(data.items,"saTSA");
+
 
   const backgroundImage = `https:${data.bgimage.fields.file.url}`;
  const { settings } = useSiteSettings() || {};
@@ -31,6 +32,7 @@ console.log(data.items,"saTSA");
           : "";
 
         return (
+          
           <div
             key={index}
             className="  p-6 rounded-lg shadow-lg text-center"

@@ -11,6 +11,7 @@ import { getContent2 } from "@/contentful/page";
 import HomeIcons from "@/app/HomeIcons/page";
 import QuickLinksFloatingPanel from "@/app/QuickLinksFloatingPanel/page";
 import { SiteSettingsProvider } from "@/app/context/SiteSettingsContext";
+import AnimationWrapper from "@/app/AnimationWrapper/page";
 
 const Careers = () => {
   const [careersData, setCareersData] = useState(null);
@@ -21,10 +22,10 @@ const Careers = () => {
       try {
         const entries = await getContent2("careers");
         const fields = entries[0]?.fields;
-        console.log("Resolved fields:", fields);
-        // Resolve job references
+      
+      
         const resolvedJobs = (fields?.jobs || [])
-          .filter((job) => job?.fields) // ⬅️ Ensure job.fields exists
+          .filter((job) => job?.fields)
           .map((job) => ({
             title: job.fields.title || "",
             location: job.fields.location || "",
@@ -78,7 +79,7 @@ const Careers = () => {
             }}
           />
           <JobList jobList={careersData.jobs} bgImage={careersData.bgimage} />
-          <Footer />
+         <AnimationWrapper > <Footer /></AnimationWrapper> 
         </QuickLinksProvider>
       </SiteSettingsProvider>
     </div>

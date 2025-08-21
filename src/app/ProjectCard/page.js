@@ -7,13 +7,14 @@ import { getContent2 } from "@/contentful/page";
 import { QuickLinksProvider } from "@/app/context/quickLinks";
 import ProjectView from "@/app/ProjectView/page";
 import { useSiteSettings } from "@/app/context/SiteSettingsContext";
+import AnimationWrapper from "../AnimationWrapper/page";
 const ProjectCard = () => {
   const [projectData, setProjectData] = useState(null);
   const [error, setError] = useState(null);
   const [showViewer, setShowViewer] = useState(false);
   const [galleryData, setGalleryData] = useState({ images: [], info: {} });
- 
-   const { settings } = useSiteSettings() || {};
+
+  const { settings } = useSiteSettings() || {};
   useEffect(() => {
     async function fetchData() {
       try {
@@ -74,14 +75,15 @@ const ProjectCard = () => {
       <QuickLinksProvider>
         <div
           className="w-full bg-gray-100 py-12"
-        
-          style={{backgroundImage: `url(${projectData.bgimage})`,
-       fontFamily: settings?.fontFamily,
-          color: settings?.fontColor,
-     }}
+          style={{
+            backgroundImage: `url(${projectData.bgimage})`,
+            fontFamily: settings?.fontFamily,
+            color: settings?.fontColor,
+          }}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {projectData.projects.map((project, idx) => (
+              <AnimationWrapper key={idx} type="fadeInLeft">
               <div
                 key={project.id || idx}
                 className="bg-white p-4 rounded-xl shadow-lg hover:shadow-2xl transition duration-300"
@@ -104,7 +106,7 @@ const ProjectCard = () => {
                     </button>
                   )}
                 </div>
-              </div>
+              </div></AnimationWrapper>
             ))}
           </div>
         </div>

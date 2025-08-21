@@ -6,6 +6,7 @@ import LoadingSpinner from "@/app/LoadingSpinner/page";
 import { getContent2 } from "@/contentful/page";
 import { QuickLinksProvider } from "@/app/context/quickLinks";
 import { SiteSettingsProvider } from "@/app/context/SiteSettingsContext";
+import AnimationWrapper from "@/app/AnimationWrapper/page";
 
 
 
@@ -53,9 +54,9 @@ const Privacy = () => {
     <SiteSettingsProvider>
       <QuickLinksProvider>
         <div className="flex flex-col">
-          <Header />
+          <Header /> <AnimationWrapper type="fadeInLeft">
           <div
-            className="bg-black text-white px-6 pt-40"
+            className="bg-black text-white px-6 pt-40 pb-10"
            
           >
             <div className="max-w-4xl mx-auto">
@@ -81,8 +82,11 @@ const Privacy = () => {
                 </section>
               ))}
             </div>
-          </div>
-          <Footer />
+           
+          </div></AnimationWrapper>
+          <AnimationWrapper>
+              <Footer />
+            </AnimationWrapper>
         </div>
       </QuickLinksProvider>
     </SiteSettingsProvider>
