@@ -10,6 +10,8 @@ import { getContent2 } from "@/contentful/page";
 import { QuickLinksProvider } from "@/app/context/quickLinks";
 import ProjectCard from "@/app/ProjectCard/page";
 import { SiteSettingsProvider } from "@/app/context/SiteSettingsContext";
+import AnimationWrapper from "@/app/AnimationWrapper/page";
+
 
 const OurProjects = () => {
   const [projectData, setProjectData] = useState(null);
@@ -75,7 +77,7 @@ const OurProjects = () => {
         <Header />
         <QuickLinksFloatingPanel />
         <HomeIcons />
-        <BanenerComponent
+       <BanenerComponent
           data={{
             title: projectData.title,
             subtitle: projectData.subtitle,
@@ -85,7 +87,7 @@ const OurProjects = () => {
 
         <ProjectCard />
 
-        <Footer />
+       <AnimationWrapper> <Footer /></AnimationWrapper>
       </QuickLinksProvider></SiteSettingsProvider>
     </div>
   );

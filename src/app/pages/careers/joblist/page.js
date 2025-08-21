@@ -1,5 +1,6 @@
 import { FaMapMarkerAlt, FaGraduationCap, FaCalendarAlt } from "react-icons/fa";
 import { useSiteSettings } from "@/app/context/SiteSettingsContext";
+import AnimationWrapper from "@/app/AnimationWrapper/page";
 const JobList = ({ bgImage, jobList }) => {
 
 if (!jobList) return null
@@ -17,6 +18,7 @@ if (!jobList) return null
     >
       <div className="max-w-5xl mx-auto bg-white bg-opacity-70 rounded-lg p-6 space-y-10">
         {jobList.map((job, index) => (
+         <AnimationWrapper type="fadeInLeft" key={index}>
           <div
             key={index}
             className="border-b border-gray-400 pb-6 last:border-none"
@@ -61,7 +63,7 @@ if (!jobList) return null
                 </p>
               ))}
             </div>
-          </div>
+          </div></AnimationWrapper>
         ))}
       </div>
     </div>

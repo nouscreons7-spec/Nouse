@@ -1,9 +1,11 @@
+import AnimationWrapper from "../AnimationWrapper/page";
 import { useSiteSettings } from "../context/SiteSettingsContext";
 
 const BanenerComponent = ({ data }) => {
   if (!data) return null;
   const { settings } = useSiteSettings() || {};
   return (
+    <AnimationWrapper  type = "fadeInUp" delay =" 0.2">
     <div
       className="relative w-full h-[50vh] md:h-screen overflow-hidden"
       style={{
@@ -24,7 +26,7 @@ const BanenerComponent = ({ data }) => {
         <h1 className="text-2xl sm:text-4xl font-bold">{data.title}</h1>
         <h4 className="text-lg sm:text-2xl font-medium">{data.subtitle}</h4>
       </div>
-    </div>
+    </div></AnimationWrapper>
   );
 };
 

@@ -16,7 +16,7 @@ const ProjectView = ({ images = [], info, onClose }) => {
   const selectImage = (index) => {
     setCurrentIndex(index);
   };
-console.log(info,"info",images);
+
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center overflow-y-auto px-2">

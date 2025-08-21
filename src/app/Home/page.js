@@ -17,10 +17,11 @@ import { getContent } from "@/contentful/page";
 import LoadingSpinner from "../LoadingSpinner/page";
 import HomeIcons from "../HomeIcons/page";
 import { SiteSettingsProvider } from "../context/SiteSettingsContext";
+import AnimationWrapper from "../AnimationWrapper/page";
 const Home = () => {
   const [homeData, setHomeData] = useState(null);
   const [error, setError] = useState(null);
- 
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -62,23 +63,48 @@ const Home = () => {
   return (
     <div>
       <SiteSettingsProvider>
-      <Header />
-      <Banner data={homeData.homebanner} />
-     <QuickLinksFloatingPanel  />
-           <HomeIcons /> 
-      <CompletedProjects data={homeData.finishedprojects} />
+        <Header />
 
-      <ProjectSection data={homeData.projectsSection} />
-      <AnnounceContent announcementData={homeData.announcementData} />
-      <Message messageData={homeData.messageData} />
-      <WhyNous data={homeData.paragraphSectionData} />
-      <FeatureSection data={homeData.featuresData} />
-      <Message messageData={homeData.secondMessageData} />
-      <TestimonialSection data={homeData.testimonialSection} />
-      <EnsureSection data={homeData.ensureSection}/>
-      <Advertisement data={homeData.AdvertisementSection}/>
-      <AnnounceContent announcementData={homeData.secondAnnouncementData} />
-      <Footer />
+        <AnimationWrapper stagger={0.4}>
+          <Banner data={homeData.homebanner} />
+        </AnimationWrapper>
+        <QuickLinksFloatingPanel />
+        <HomeIcons />
+        <AnimationWrapper type="zoomIn" stagger={0.6}>
+          <CompletedProjects data={homeData.finishedprojects} />
+        </AnimationWrapper>
+
+        <AnimationWrapper type="zoomIn" stagger={0.6}>
+          <ProjectSection data={homeData.projectsSection} />
+        </AnimationWrapper>
+        <AnimationWrapper type="zoomIn" stagger={0.6}>
+          <AnnounceContent announcementData={homeData.announcementData} />
+        </AnimationWrapper>
+        <AnimationWrapper type="zoomIn" stagger={0.6}>
+          <Message messageData={homeData.messageData} />
+        </AnimationWrapper>
+        <AnimationWrapper type="zoomIn" stagger={0.6}>
+          <WhyNous data={homeData.paragraphSectionData} />
+        </AnimationWrapper>
+        <AnimationWrapper type="zoomIn" stagger={0.6}>
+          <FeatureSection data={homeData.featuresData} />
+        </AnimationWrapper>
+        <AnimationWrapper stagger={0.4}>
+          <Message messageData={homeData.secondMessageData} />
+        </AnimationWrapper>
+        <TestimonialSection data={homeData.testimonialSection} />
+        <AnimationWrapper type="fadeInDown" stagger={0.4}>
+          <EnsureSection data={homeData.ensureSection} />
+        </AnimationWrapper>
+        <AnimationWrapper type="zoomIn" stagger={0.4}>
+          <Advertisement data={homeData.AdvertisementSection} />
+        </AnimationWrapper>
+        <AnimationWrapper type="zoomIn" stagger={0.4}>
+          <AnnounceContent announcementData={homeData.secondAnnouncementData} />
+        </AnimationWrapper>
+        <AnimationWrapper stagger={0.4}>
+          <Footer />
+        </AnimationWrapper>
       </SiteSettingsProvider>
     </div>
   );

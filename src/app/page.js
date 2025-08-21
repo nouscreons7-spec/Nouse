@@ -48,7 +48,7 @@ const Root = () => {
               </div>
             }
           >
-            {/* If Home should be your landing, render Home here instead of LoginPage */}
+         
             <LoginPage />
           </Suspense>
         </QuickLinksProvider>

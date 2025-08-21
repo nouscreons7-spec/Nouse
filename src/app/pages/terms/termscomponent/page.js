@@ -6,7 +6,7 @@ import LoadingSpinner from "@/app/LoadingSpinner/page";
 import { getContent2 } from "@/contentful/page";
 import { QuickLinksProvider } from "@/app/context/quickLinks";
 import { SiteSettingsProvider } from "@/app/context/SiteSettingsContext";
-
+import AnimationWrapper from "@/app/AnimationWrapper/page";
 
 const Terms = () => {
   const [termsData, setTermsData] = useState(null);
@@ -41,7 +41,8 @@ const Terms = () => {
   }, []);
 
   if (error) return <div>Error loading content: {error}</div>;
-  if (!termsData) return (
+  if (!termsData)
+    return (
       <div className="flex items-center justify-center h-screen">
         <LoadingSpinner />
       </div>
@@ -51,32 +52,36 @@ const Terms = () => {
       <QuickLinksProvider>
         <div className="flex flex-col">
           <Header />
-          <div className="bg-black text-white  px-6 pt-40">
-            <div className="max-w-4xl mx-auto">
-              <h1 className="text-3xl font-bold mb-6 border-b border-gray-700 pb-2">
-                {termsData.title}
-              </h1>
+          <AnimationWrapper type="fadeInLeft">
+            <div className="bg-black text-white  px-6 pt-40 pb-10">
+              <div className="max-w-4xl mx-auto">
+                <h1 className="text-3xl font-bold mb-6 border-b border-gray-700 pb-2">
+                  {termsData.title}
+                </h1>
 
-              <p className=" mb-6">{termsData.intro}</p>
+                <p className=" mb-6">{termsData.intro}</p>
 
-              {termsData.sections.map((section, index) => (
-                <section className="mb-8" key={index}>
-                  <h2 className="text-xl font-semibold mb-2">
-                    {section.title}
-                  </h2>
-                  <p className=" mb-2">{section.content}</p>
-                  {section.list && section.list.length > 0 && (
-                    <ul className="list-disc list-inside  space-y-1">
-                      {section.list.map((item, i) => (
-                        <li key={i}>{item}</li>
-                      ))}
-                    </ul>
-                  )}
-                </section>
-              ))}
+                {termsData.sections.map((section, index) => (
+                  <section className="mb-8" key={index}>
+                    <h2 className="text-xl font-semibold mb-2">
+                      {section.title}
+                    </h2>
+                    <p className=" mb-2">{section.content}</p>
+                    {section.list && section.list.length > 0 && (
+                      <ul className="list-disc list-inside  space-y-1">
+                        {section.list.map((item, i) => (
+                          <li key={i}>{item}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </section>
+                ))}
+              </div>
             </div>
-          </div>
-          <Footer />
+            <AnimationWrapper>
+              <Footer />
+            </AnimationWrapper>
+          </AnimationWrapper>
         </div>
       </QuickLinksProvider>
     </SiteSettingsProvider>

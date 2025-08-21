@@ -12,6 +12,7 @@ import LoadingSpinner from "@/app/LoadingSpinner/page";
 import HomeIcons from "@/app/HomeIcons/page";
 import QuickLinksFloatingPanel from "@/app/QuickLinksFloatingPanel/page";
 import { SiteSettingsProvider } from "@/app/context/SiteSettingsContext";
+import AnimationWrapper from "@/app/AnimationWrapper/page";
 
 const ContactUs = () => {
   const [contactData, setContactData] = useState(null);
@@ -35,7 +36,7 @@ const ContactUs = () => {
           image: fields.bannerImage?.fields?.file?.url || "",
           bgimage: fields.bgImage?.fields?.file?.url || "",
         };
-       console.log(formattedData);
+      
        
         setContactData(formattedData);
       } catch (err) {
@@ -74,11 +75,11 @@ const ContactUs = () => {
           style={{ backgroundImage: `url(${contactData.bgimage})` }}
         >
           <div className="bg-opacity-80 w-full flex justify-center items-center flex-col md:flex-row">
-            <ContactDetails data={contactData} />
+           <ContactDetails data={contactData} />
             <MapEmbed image={contactData.mapImage} />
           </div>
         </div>
-        <Footer />
+       <AnimationWrapper> <Footer /></AnimationWrapper>
       </QuickLinksProvider></SiteSettingsProvider>
     </div>
   );
