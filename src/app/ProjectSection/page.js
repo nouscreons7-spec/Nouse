@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useRef, } from "react";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { useSiteSettings } from "../context/SiteSettingsContext";
 import ProjectCard from "../ProjectCard/page";
