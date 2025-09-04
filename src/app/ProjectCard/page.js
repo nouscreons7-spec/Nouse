@@ -99,8 +99,12 @@ const ProjectCard = () => {
                 <div className="flex items-center justify-center">
                   {projectData.buttonText && (
                     <button
+                     style={{
+              background: settings?.buttonColor,
+              color: settings?.fontColor,
+            }}
                       onClick={() => openViewer(project)}
-                      className="cursor-pointer mt-4 flex justify-center w-1/2 md:w-full bg-indigo-600  py-2 px-4 rounded-lg hover:bg-indigo-700 transition"
+                      className="cursor-pointer mt-4 flex justify-center w-1/2 md:w-full py-2 px-4 rounded-lg  transition"
                     >
                       {projectData.buttonText}
                     </button>
