@@ -93,7 +93,7 @@ const ProjectCard = () => {
                   alt={project.projectname}
                   className="w-full h-[248px] min-h-[248px] max-h-[248px] object-cover rounded-lg"
                 />
-                <h3 className="text-lg font-semibold  mt-4 min-h-[48px] max-h-[48px] overflow-hidden">
+                <h3 className="text-lg font-semibold  mt-4 min-h-[48px] max-h-[48px] overflow-hidden" style={{color:"black"}}>
                   {project.projectname}
                 </h3>
                 <div className="flex items-center justify-center">

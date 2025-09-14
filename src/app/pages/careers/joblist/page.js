@@ -23,9 +23,9 @@ if (!jobList) return null
             key={index}
             className="border-b border-gray-400 pb-6 last:border-none"
           >
-            <h2 className="text-xl font-semibold  mb-4">
+            <div className=" text-xl font-semibold  mb-4" style={{color:"black"}}>
               {job.title}
-            </h2>
+            </div>
 
             <div className="flex flex-col gap-2 text-sm text-gray-800">
               {job.qualification && (
