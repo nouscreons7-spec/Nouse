@@ -11,7 +11,7 @@ if (!jobList) return null
       className="bg-cover bg-center  py-12 px-4 md:px-12"
       style={{ backgroundImage: `url(${bgImage})`,
        fontFamily: settings?.fontFamily,
-          color: settings?.fontColor,
+      
      }}
 
       
